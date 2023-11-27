@@ -1,7 +1,7 @@
 import XCTest
-@testable import ServiceExtension
+@testable import SWebEngageBannerPush
 
-final class ServiceExtensionTests: XCTestCase {
+final class WebEngageBannerPushTests: XCTestCase {
     func testExample() throws {
         // XCTest Documentation
         // https://developer.apple.com/documentation/xctest
