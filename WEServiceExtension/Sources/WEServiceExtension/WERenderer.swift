@@ -19,7 +19,7 @@ struct WERenderer {
     ///   - bestAttemptContent: The best attempt notification content.
     ///   - contentHandler: A closure for handling the notification content.
     static func handleContentFor(style: String, image: String, bestAttemptContent: UNMutableNotificationContent?, contentHandler: ((UNNotificationContent) -> Void)?) {
-        if (style == "BIG_PICTURE" || style == "RATING_V1") && !image.isEmpty {
+        if (style == "BIG_PICTURE" || style == "RATING_V1" || style == "OVERLAY") && !image.isEmpty {
             drawBannerView(with: image, bestAttemptContent: bestAttemptContent, contentHandler: contentHandler)
         } else {
             Network.trackEvent(completion: {
