@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,7 +13,7 @@
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		661FA3B48048C6966E9F3F64 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		661FA3B48048C6966E9F3F64 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		861C243B3ABADD28555EA024 /* Pods_WESE_Example_Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 104843D019EC228B3B0C5E3E /* Pods_WESE_Example_Pods.framework */; };
 		BB57412AB2B008E6FB815F51 /* Pods_WESE_Example_Pods_Objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8DCAA7C7D7700629EF3D35E /* Pods_WESE_Example_Pods_Objc.framework */; };
 		CE1F30BA2BA18156009C9F0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -32,9 +32,7 @@
 		CE284C682B9F38330047FC23 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		CE284C7D2B9F3C190047FC23 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE284C7C2B9F3C190047FC23 /* NotificationService.swift */; };
 		CE284C812B9F3C190047FC23 /* SPM-ServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CE284C7A2B9F3C190047FC23 /* SPM-ServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		CE284C8B2B9F3DBD0047FC23 /* WEServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = CE284C8A2B9F3DBD0047FC23 /* WEServiceExtension */; };
-		CE284C8E2B9F3DF40047FC23 /* WEServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = CE284C8D2B9F3DF40047FC23 /* WEServiceExtension */; };
-		CEA460C32B9F4227007D6167 /* WEServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = CEA460C22B9F4227007D6167 /* WEServiceExtension */; };
+		CE8DDB562BA1C2C300B9041B /* WEServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = CE8DDB552BA1C2C300B9041B /* WEServiceExtension */; };
 		DC769FB774E0EE10E5503977 /* Pods_WESE_Example_Pods_Objc_PODS_Objc_ServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD5DD80D0DBE81B7581B6EF /* Pods_WESE_Example_Pods_Objc_PODS_Objc_ServiceExtension.framework */; };
 		F080AD5BF62CA3DC29499A98 /* Pods_WESE_Example_SPM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 628BAB79228E0F47A1A39F7C /* Pods_WESE_Example_SPM.framework */; };
 /* End PBXBuildFile section */
@@ -153,7 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				661FA3B48048C6966E9F3F64 /* BuildFile in Frameworks */,
+				661FA3B48048C6966E9F3F64 /* (null) in Frameworks */,
 				861C243B3ABADD28555EA024 /* Pods_WESE_Example_Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -194,9 +192,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE284C8E2B9F3DF40047FC23 /* WEServiceExtension in Frameworks */,
-				CE284C8B2B9F3DBD0047FC23 /* WEServiceExtension in Frameworks */,
-				CEA460C32B9F4227007D6167 /* WEServiceExtension in Frameworks */,
+				CE8DDB562BA1C2C300B9041B /* WEServiceExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,9 +440,7 @@
 			);
 			name = "SPM-ServiceExtension";
 			packageProductDependencies = (
-				CE284C8A2B9F3DBD0047FC23 /* WEServiceExtension */,
-				CE284C8D2B9F3DF40047FC23 /* WEServiceExtension */,
-				CEA460C22B9F4227007D6167 /* WEServiceExtension */,
+				CE8DDB552BA1C2C300B9041B /* WEServiceExtension */,
 			);
 			productName = "SPM-ServiceExtension";
 			productReference = CE284C7A2B9F3C190047FC23 /* SPM-ServiceExtension.appex */;
@@ -494,7 +488,7 @@
 			);
 			mainGroup = 607FACC71AFB9204008FA782;
 			packageReferences = (
-				CEA460C12B9F4227007D6167 /* XCLocalSwiftPackageReference "WEServiceExtension" */,
+				CE8DDB542BA1C2C300B9041B /* XCRemoteSwiftPackageReference "WEServiceExtension" */,
 			);
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
 			projectDirPath = "";
@@ -1371,24 +1365,21 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		CEA460C12B9F4227007D6167 /* XCLocalSwiftPackageReference "WEServiceExtension" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../WEServiceExtension;
+/* Begin XCRemoteSwiftPackageReference section */
+		CE8DDB542BA1C2C300B9041B /* XCRemoteSwiftPackageReference "WEServiceExtension" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WebEngage/WEServiceExtension/";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
 		};
-/* End XCLocalSwiftPackageReference section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CE284C8A2B9F3DBD0047FC23 /* WEServiceExtension */ = {
+		CE8DDB552BA1C2C300B9041B /* WEServiceExtension */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = WEServiceExtension;
-		};
-		CE284C8D2B9F3DF40047FC23 /* WEServiceExtension */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = WEServiceExtension;
-		};
-		CEA460C22B9F4227007D6167 /* WEServiceExtension */ = {
-			isa = XCSwiftPackageProductDependency;
+			package = CE8DDB542BA1C2C300B9041B /* XCRemoteSwiftPackageReference "WEServiceExtension" */;
 			productName = WEServiceExtension;
 		};
 /* End XCSwiftPackageProductDependency section */
