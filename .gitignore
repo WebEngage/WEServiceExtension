@@ -1,0 +1,9 @@
+UserInterfaceState.xcuserstate
+Example/build
+Example/WEServiceExtension.xcodeproj/xcshareddata
+Example/Pods
+Podfile.lock
+xcschememanagement.plist
+.DS_Store
+Example/.swiftpm
+Example/WEServiceExtension.xcworkspace/xcshareddata
