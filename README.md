@@ -5,24 +5,34 @@
 [![License](https://img.shields.io/cocoapods/l/WEServiceExtension.svg?style=flat)](https://cocoapods.org/pods/WEServiceExtension)
 [![Platform](https://img.shields.io/cocoapods/p/WEServiceExtension.svg?style=flat)](https://cocoapods.org/pods/WEServiceExtension)
 
-## Example
-
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
 
 ## Installation
 
 WEServiceExtension is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+it, simply add the following below :
 
-```ruby
-pod 'WEServiceExtension'
-```
+## Notification Service Extension Setup
+### Create Notification Service Extension
+#### Step 1:
+In Xcode, navigate to File > New > Target and select Notification Service Extension.
 
-## Author
+#### Step 2:
+Click Next, fill out the Product Name as NotificationService, and click Finish.
 
-BhaveshWebEngage, bhavesh.sarwar@webengage.com
+#### Step 3:
+Click Activate on the prompt shown to activate the service extension. Xcode will now create a new top-level folder in your project with the name NotificationService.
+
+### Add WebEngage Extensions to the respective Targets
+Navigate to Project > Package Dependencies and click on the Add (+) button.
+
+Steps to add WebEngage Notification Service
+#### Step 1:
+Search for https://github.com/WebEngage/WEServiceExtension.git in the search bar.
+#### Step 2:
+Under Add to Target select NotificationService (Your Service Extension Target).
+#### Step 3:
+Click Add Package.
+
 
 ## License
 
