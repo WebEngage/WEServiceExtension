@@ -5,3 +5,5 @@ Example/Pods
 Podfile.lock
 xcschememanagement.plist
 .DS_Store
+Example/.swiftpm
+Example/WEServiceExtension.xcworkspace/xcshareddata
