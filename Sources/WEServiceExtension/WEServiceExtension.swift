@@ -7,6 +7,7 @@
 
 import UserNotifications
 
+@objc
 open class WEXPushNotificationService: UNNotificationServiceExtension {
     
     var contentHandler: ((UNNotificationContent) -> Void)?
@@ -26,7 +27,7 @@ open class WEXPushNotificationService: UNNotificationServiceExtension {
                     WERenderer.drawCarouselView(with: items, bestAttemptContent: self.bestAttemptContent, contentHandler: self.contentHandler)
                 } else if style == "RATING_V1", let image = expandableDetails["image"] as? String {
                     WERenderer.handleContentFor(style: style, image: image, bestAttemptContent: self.bestAttemptContent, contentHandler: self.contentHandler)
-                } else if style == "BIG_PICTURE" || style == "BIG_TEXT" {
+                } else if style == "BIG_PICTURE" || style == "BIG_TEXT" || style == "OVERLAY" {
                     customCategories = ["WEG_RICH_V1", "WEG_RICH_V2", "WEG_RICH_V3", "WEG_RICH_V4", "WEG_RICH_V5", "WEG_RICH_V6", "WEG_RICH_V7", "WEG_RICH_V8"]
                     
                     if let customCategory = WEHelper.getCategoryFor(categories: customCategories ?? [""], currentCategory: bestAttemptContent?.categoryIdentifier ?? "")  {

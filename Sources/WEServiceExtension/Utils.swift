@@ -11,7 +11,7 @@ import Foundation
 struct Utils {
     
     /// The version of the service extension.
-    static let WEX_SERVICE_EXTENSION_VERSION = "1.0.2"
+    static let WEX_SERVICE_EXTENSION_VERSION = "1.1.0"
     
     /// Get the current time in a formatted string.
     ///
@@ -41,6 +41,7 @@ struct Utils {
         data["app_id"] = defaults.string(forKey: "app_id")
         
         print("Environment: \(defaults.string(forKey: "environment") ?? "")")
+        data["environment"] = defaults.string(forKey: "environment") ?? ""
         return data
     }
     

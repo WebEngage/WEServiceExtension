@@ -1,0 +1,24 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+# Swift example by integrating through Cocoapods
+target 'WESE-Example-Pods' do
+  pod 'WebEngage'
+  target 'PODS-ServiceExtension' do
+    pod 'WEServiceExtension', :path => '../'
+  end
+end
+
+# Objc-C example by integrating through Cocoapods
+target 'WESE-Example-Pods-Objc' do
+  pod 'WebEngage'
+  target 'PODS-Objc-ServiceExtension' do
+    pod 'WEServiceExtension', :path => '../'
+  end
+end
+
+# Swift example by integrating through SPM
+target 'WESE-Example-SPM' do
+  pod 'WebEngage'
+end
