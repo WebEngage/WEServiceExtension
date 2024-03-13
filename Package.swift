@@ -16,10 +16,10 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "WEServiceExtension",
-        path: "WEServiceExtension/Sources"),
+            exclude: ["../../WEServiceExtension.podspec",
+                      "../../Example"]),
         .testTarget(
             name: "WEServiceExtensionTests",
-            dependencies: ["WEServiceExtension"],
-            path: "WEServiceExtension/Tests"),
+            dependencies: ["WEServiceExtension"]),
     ]
 )
