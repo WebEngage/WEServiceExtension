@@ -7,13 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		320BC54D61DC67932C91C0BB /* Pods_PODS_ServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62FCAD937A88A93E224FE850 /* Pods_PODS_ServiceExtension.framework */; };
+		25158BA4FE913F32FAEADF20 /* Pods_WESE_Example_Pods_PODS_ServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF4C733C3B82BF82888BDD9 /* Pods_WESE_Example_Pods_PODS_ServiceExtension.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		661FA3B48048C6966E9F3F64 /* Pods_WESE_Example_Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D9A26A42CD2EE1357AA5599 /* Pods_WESE_Example_Pods.framework */; };
+		661FA3B48048C6966E9F3F64 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		861C243B3ABADD28555EA024 /* Pods_WESE_Example_Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 104843D019EC228B3B0C5E3E /* Pods_WESE_Example_Pods.framework */; };
+		BB57412AB2B008E6FB815F51 /* Pods_WESE_Example_Pods_Objc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8DCAA7C7D7700629EF3D35E /* Pods_WESE_Example_Pods_Objc.framework */; };
+		CE1F30BA2BA18156009C9F0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
+		CE1F30BB2BA18156009C9F0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
+		CE1F30BF2BA18156009C9F0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
+		CE1F30C02BA18156009C9F0D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
+		CE1F30C12BA18156009C9F0D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
+		CE1F30D22BA181C2009C9F0D /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1F30D12BA181C2009C9F0D /* NotificationService.m */; };
+		CE1F30D62BA181C2009C9F0D /* PODS-Objc-ServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CE1F30CE2BA181C2009C9F0D /* PODS-Objc-ServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CE284C422B9F35C60047FC23 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE284C412B9F35C60047FC23 /* NotificationService.swift */; };
 		CE284C462B9F35C60047FC23 /* PODS-ServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CE284C3F2B9F35C60047FC23 /* PODS-ServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CE284C612B9F38330047FC23 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -26,10 +35,18 @@
 		CE284C8B2B9F3DBD0047FC23 /* WEServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = CE284C8A2B9F3DBD0047FC23 /* WEServiceExtension */; };
 		CE284C8E2B9F3DF40047FC23 /* WEServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = CE284C8D2B9F3DF40047FC23 /* WEServiceExtension */; };
 		CEA460C32B9F4227007D6167 /* WEServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = CEA460C22B9F4227007D6167 /* WEServiceExtension */; };
+		DC769FB774E0EE10E5503977 /* Pods_WESE_Example_Pods_Objc_PODS_Objc_ServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD5DD80D0DBE81B7581B6EF /* Pods_WESE_Example_Pods_Objc_PODS_Objc_ServiceExtension.framework */; };
 		F080AD5BF62CA3DC29499A98 /* Pods_WESE_Example_SPM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 628BAB79228E0F47A1A39F7C /* Pods_WESE_Example_SPM.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		CE1F30D42BA181C2009C9F0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE1F30CD2BA181C2009C9F0D;
+			remoteInfo = "PODS-Objc-ServiceExtension";
+		};
 		CE284C442B9F35C60047FC23 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
@@ -47,6 +64,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		CE1F30DA2BA181C2009C9F0D /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				CE1F30D62BA181C2009C9F0D /* PODS-Objc-ServiceExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE284C4A2B9F35C60047FC23 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -72,6 +100,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		01002D4123D63F99E104FB60 /* Pods-WESE-Example-Pods-Objc-PODS-Objc-ServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WESE-Example-Pods-Objc-PODS-Objc-ServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-WESE-Example-Pods-Objc-PODS-Objc-ServiceExtension/Pods-WESE-Example-Pods-Objc-PODS-Objc-ServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		104843D019EC228B3B0C5E3E /* Pods_WESE_Example_Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WESE_Example_Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A62E84EFFBCE2F3B8ABC550 /* Pods_WEServiceExtension_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WEServiceExtension_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FE268E905E561F2B6B4226A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		58156083117295A0D26670FB /* Pods-WESE-Example-SPM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WESE-Example-SPM.debug.xcconfig"; path = "Target Support Files/Pods-WESE-Example-SPM/Pods-WESE-Example-SPM.debug.xcconfig"; sourceTree = "<group>"; };
@@ -83,29 +113,39 @@
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		628BAB79228E0F47A1A39F7C /* Pods_WESE_Example_SPM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WESE_Example_SPM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		62FCAD937A88A93E224FE850 /* Pods_PODS_ServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PODS_ServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AA3426A5F7343AA6271CF71 /* Pods-WEServiceExtension_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WEServiceExtension_Tests.debug.xcconfig"; path = "Target Support Files/Pods-WEServiceExtension_Tests/Pods-WEServiceExtension_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		6E5EB12C0722A0798409A238 /* Pods-WESE-Example-Pods-Objc-PODS-Objc-ServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WESE-Example-Pods-Objc-PODS-Objc-ServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-WESE-Example-Pods-Objc-PODS-Objc-ServiceExtension/Pods-WESE-Example-Pods-Objc-PODS-Objc-ServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		7705408D12A8155FF531C0B4 /* Pods-ServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-ServiceExtension/Pods-ServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		7BDEA2A8BBAA08ACDF3795B5 /* Pods-WEServiceExtension_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WEServiceExtension_Tests.release.xcconfig"; path = "Target Support Files/Pods-WEServiceExtension_Tests/Pods-WEServiceExtension_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		7D606FD4FB73A40682A54B1D /* Pods-WESE-Example-SPM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WESE-Example-SPM.release.xcconfig"; path = "Target Support Files/Pods-WESE-Example-SPM/Pods-WESE-Example-SPM.release.xcconfig"; sourceTree = "<group>"; };
-		8D9A26A42CD2EE1357AA5599 /* Pods_WESE_Example_Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WESE_Example_Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		86EE821C0BE3D5F96BD31FDF /* Pods-WESE-Example-Pods-PODS-ServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WESE-Example-Pods-PODS-ServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-WESE-Example-Pods-PODS-ServiceExtension/Pods-WESE-Example-Pods-PODS-ServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		8FD5DD80D0DBE81B7581B6EF /* Pods_WESE_Example_Pods_Objc_PODS_Objc_ServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WESE_Example_Pods_Objc_PODS_Objc_ServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A73F6D449238FD0B3B80DB3 /* Pods-WESE-Example-Pods-Objc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WESE-Example-Pods-Objc.release.xcconfig"; path = "Target Support Files/Pods-WESE-Example-Pods-Objc/Pods-WESE-Example-Pods-Objc.release.xcconfig"; sourceTree = "<group>"; };
 		9B1143D99E7C7462F2D3F6C4 /* Pods-PODS-ServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PODS-ServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-PODS-ServiceExtension/Pods-PODS-ServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		9C0C53B5F39F9E0F1D8FFEC5 /* Pods-WESE-Example-Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WESE-Example-Pods.debug.xcconfig"; path = "Target Support Files/Pods-WESE-Example-Pods/Pods-WESE-Example-Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		9FF4C733C3B82BF82888BDD9 /* Pods_WESE_Example_Pods_PODS_ServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WESE_Example_Pods_PODS_ServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6BE59A1A1D8F764136F8ED4 /* Pods-ServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-ServiceExtension/Pods-ServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
+		C8DCAA7C7D7700629EF3D35E /* Pods_WESE_Example_Pods_Objc.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WESE_Example_Pods_Objc.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAE195CFF3E93B50C8A4EA99 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		CE1F30C82BA18156009C9F0D /* WESE-Example-Pods-Objc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WESE-Example-Pods-Objc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE1F30CE2BA181C2009C9F0D /* PODS-Objc-ServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PODS-Objc-ServiceExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE1F30D02BA181C2009C9F0D /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
+		CE1F30D12BA181C2009C9F0D /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
+		CE1F30D32BA181C2009C9F0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE284C3F2B9F35C60047FC23 /* PODS-ServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "PODS-ServiceExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE284C412B9F35C60047FC23 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		CE284C432B9F35C60047FC23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE284C5A2B9F378C0047FC23 /* ServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ServiceExtension.entitlements; sourceTree = "<group>"; };
 		CE284C6F2B9F38330047FC23 /* WESE-Example-SPM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WESE-Example-SPM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE284C702B9F38330047FC23 /* WEServiceExtension_Example copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "WEServiceExtension_Example copy-Info.plist"; path = "/Volumes/Bhavesh/WebEngage/WorkSpace/iOS/Extension-SDK/WENotificationExtension/Example/WEServiceExtension_Example copy-Info.plist"; sourceTree = "<absolute>"; };
 		CE284C752B9F3BD50047FC23 /* WESE-Example.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = "WESE-Example.entitlements"; sourceTree = "<group>"; };
 		CE284C7A2B9F3C190047FC23 /* SPM-ServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SPM-ServiceExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE284C7C2B9F3C190047FC23 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		CE284C7E2B9F3C190047FC23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DF813955C9A25F35166A027F /* WEServiceExtension.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = WEServiceExtension.podspec; path = ../WEServiceExtension.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E18571B0E06CCBE36A429EAE /* Pods-WESE-Example-Pods-PODS-ServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WESE-Example-Pods-PODS-ServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-WESE-Example-Pods-PODS-ServiceExtension/Pods-WESE-Example-Pods-PODS-ServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		E2829A60B1F01FB30324C655 /* Pods-PODS-ServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PODS-ServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-PODS-ServiceExtension/Pods-PODS-ServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		E7340663088A1ADD9A68C61B /* Pods-WESE-Example-Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WESE-Example-Pods.release.xcconfig"; path = "Target Support Files/Pods-WESE-Example-Pods/Pods-WESE-Example-Pods.release.xcconfig"; sourceTree = "<group>"; };
+		F38DDAE33030C0B74DEFAADC /* Pods-WESE-Example-Pods-Objc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WESE-Example-Pods-Objc.debug.xcconfig"; path = "Target Support Files/Pods-WESE-Example-Pods-Objc/Pods-WESE-Example-Pods-Objc.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +153,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				661FA3B48048C6966E9F3F64 /* Pods_WESE_Example_Pods.framework in Frameworks */,
+				661FA3B48048C6966E9F3F64 /* BuildFile in Frameworks */,
+				861C243B3ABADD28555EA024 /* Pods_WESE_Example_Pods.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE1F30BC2BA18156009C9F0D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB57412AB2B008E6FB815F51 /* Pods_WESE_Example_Pods_Objc.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE1F30CB2BA181C2009C9F0D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC769FB774E0EE10E5503977 /* Pods_WESE_Example_Pods_Objc_PODS_Objc_ServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,7 +178,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				320BC54D61DC67932C91C0BB /* Pods_PODS_ServiceExtension.framework in Frameworks */,
+				25158BA4FE913F32FAEADF20 /* Pods_WESE_Example_Pods_PODS_ServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,10 +211,10 @@
 				607FACD21AFB9204008FA782 /* Example for WEServiceExtension */,
 				CE284C402B9F35C60047FC23 /* PODS-ServiceExtension */,
 				CE284C7B2B9F3C190047FC23 /* SPM-ServiceExtension */,
+				CE1F30CF2BA181C2009C9F0D /* PODS-Objc-ServiceExtension */,
 				607FACD11AFB9204008FA782 /* Products */,
 				630961CED2889649F3F796B9 /* Pods */,
 				CD84020563445827EA1787FC /* Frameworks */,
-				CE284C702B9F38330047FC23 /* WEServiceExtension_Example copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -168,6 +225,8 @@
 				CE284C3F2B9F35C60047FC23 /* PODS-ServiceExtension.appex */,
 				CE284C6F2B9F38330047FC23 /* WESE-Example-SPM.app */,
 				CE284C7A2B9F3C190047FC23 /* SPM-ServiceExtension.appex */,
+				CE1F30C82BA18156009C9F0D /* WESE-Example-Pods-Objc.app */,
+				CE1F30CE2BA181C2009C9F0D /* PODS-Objc-ServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -217,6 +276,12 @@
 				E7340663088A1ADD9A68C61B /* Pods-WESE-Example-Pods.release.xcconfig */,
 				58156083117295A0D26670FB /* Pods-WESE-Example-SPM.debug.xcconfig */,
 				7D606FD4FB73A40682A54B1D /* Pods-WESE-Example-SPM.release.xcconfig */,
+				F38DDAE33030C0B74DEFAADC /* Pods-WESE-Example-Pods-Objc.debug.xcconfig */,
+				9A73F6D449238FD0B3B80DB3 /* Pods-WESE-Example-Pods-Objc.release.xcconfig */,
+				01002D4123D63F99E104FB60 /* Pods-WESE-Example-Pods-Objc-PODS-Objc-ServiceExtension.debug.xcconfig */,
+				6E5EB12C0722A0798409A238 /* Pods-WESE-Example-Pods-Objc-PODS-Objc-ServiceExtension.release.xcconfig */,
+				86EE821C0BE3D5F96BD31FDF /* Pods-WESE-Example-Pods-PODS-ServiceExtension.debug.xcconfig */,
+				E18571B0E06CCBE36A429EAE /* Pods-WESE-Example-Pods-PODS-ServiceExtension.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -225,11 +290,23 @@
 			isa = PBXGroup;
 			children = (
 				2A62E84EFFBCE2F3B8ABC550 /* Pods_WEServiceExtension_Tests.framework */,
-				62FCAD937A88A93E224FE850 /* Pods_PODS_ServiceExtension.framework */,
-				8D9A26A42CD2EE1357AA5599 /* Pods_WESE_Example_Pods.framework */,
 				628BAB79228E0F47A1A39F7C /* Pods_WESE_Example_SPM.framework */,
+				C8DCAA7C7D7700629EF3D35E /* Pods_WESE_Example_Pods_Objc.framework */,
+				8FD5DD80D0DBE81B7581B6EF /* Pods_WESE_Example_Pods_Objc_PODS_Objc_ServiceExtension.framework */,
+				104843D019EC228B3B0C5E3E /* Pods_WESE_Example_Pods.framework */,
+				9FF4C733C3B82BF82888BDD9 /* Pods_WESE_Example_Pods_PODS_ServiceExtension.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE1F30CF2BA181C2009C9F0D /* PODS-Objc-ServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				CE1F30D02BA181C2009C9F0D /* NotificationService.h */,
+				CE1F30D12BA181C2009C9F0D /* NotificationService.m */,
+				CE1F30D32BA181C2009C9F0D /* Info.plist */,
+			);
+			path = "PODS-Objc-ServiceExtension";
 			sourceTree = "<group>";
 		};
 		CE284C402B9F35C60047FC23 /* PODS-ServiceExtension */ = {
@@ -274,6 +351,45 @@
 			productName = WEServiceExtension;
 			productReference = 607FACD01AFB9204008FA782 /* WESE-Example-Pods.app */;
 			productType = "com.apple.product-type.application";
+		};
+		CE1F30B52BA18156009C9F0D /* WESE-Example-Pods-Objc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE1F30C52BA18156009C9F0D /* Build configuration list for PBXNativeTarget "WESE-Example-Pods-Objc" */;
+			buildPhases = (
+				CE1F30B82BA18156009C9F0D /* [CP] Check Pods Manifest.lock */,
+				CE1F30B92BA18156009C9F0D /* Sources */,
+				CE1F30BC2BA18156009C9F0D /* Frameworks */,
+				CE1F30BE2BA18156009C9F0D /* Resources */,
+				CE1F30C22BA18156009C9F0D /* [CP] Embed Pods Frameworks */,
+				CE1F30DA2BA181C2009C9F0D /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE1F30D52BA181C2009C9F0D /* PBXTargetDependency */,
+			);
+			name = "WESE-Example-Pods-Objc";
+			productName = WEServiceExtension;
+			productReference = CE1F30C82BA18156009C9F0D /* WESE-Example-Pods-Objc.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CE1F30CD2BA181C2009C9F0D /* PODS-Objc-ServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE1F30D72BA181C2009C9F0D /* Build configuration list for PBXNativeTarget "PODS-Objc-ServiceExtension" */;
+			buildPhases = (
+				10E0964DAC21D0F9CB811365 /* [CP] Check Pods Manifest.lock */,
+				CE1F30CA2BA181C2009C9F0D /* Sources */,
+				CE1F30CB2BA181C2009C9F0D /* Frameworks */,
+				CE1F30CC2BA181C2009C9F0D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PODS-Objc-ServiceExtension";
+			productName = "PODS-Objc-ServiceExtension";
+			productReference = CE1F30CE2BA181C2009C9F0D /* PODS-Objc-ServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		CE284C3E2B9F35C60047FC23 /* PODS-ServiceExtension */ = {
 			isa = PBXNativeTarget;
@@ -352,6 +468,9 @@
 						DevelopmentTeam = S7X7V9YPX7;
 						LastSwiftMigration = 0900;
 					};
+					CE1F30CD2BA181C2009C9F0D = {
+						CreatedOnToolsVersion = 15.3;
+					};
 					CE284C3E2B9F35C60047FC23 = {
 						CreatedOnToolsVersion = 15.3;
 						ProvisioningStyle = Automatic;
@@ -375,7 +494,7 @@
 			);
 			mainGroup = 607FACC71AFB9204008FA782;
 			packageReferences = (
-				CEA460C12B9F4227007D6167 /* XCLocalSwiftPackageReference "../WEServiceExtension" */,
+				CEA460C12B9F4227007D6167 /* XCLocalSwiftPackageReference "WEServiceExtension" */,
 			);
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
 			projectDirPath = "";
@@ -385,6 +504,8 @@
 				CE284C792B9F3C190047FC23 /* SPM-ServiceExtension */,
 				607FACCF1AFB9204008FA782 /* WESE-Example-Pods */,
 				CE284C3E2B9F35C60047FC23 /* PODS-ServiceExtension */,
+				CE1F30B52BA18156009C9F0D /* WESE-Example-Pods-Objc */,
+				CE1F30CD2BA181C2009C9F0D /* PODS-Objc-ServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -397,6 +518,23 @@
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE1F30BE2BA18156009C9F0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE1F30BF2BA18156009C9F0D /* Main.storyboard in Resources */,
+				CE1F30C02BA18156009C9F0D /* LaunchScreen.xib in Resources */,
+				CE1F30C12BA18156009C9F0D /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE1F30CC2BA181C2009C9F0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +565,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		10E0964DAC21D0F9CB811365 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WESE-Example-Pods-Objc-PODS-Objc-ServiceExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		8D7B32AF8D172DC59B0C7401 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -486,11 +646,53 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-PODS-ServiceExtension-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-WESE-Example-Pods-PODS-ServiceExtension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE1F30B82BA18156009C9F0D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WESE-Example-Pods-Objc-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE1F30C22BA18156009C9F0D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WESE-Example-Pods-Objc/Pods-WESE-Example-Pods-Objc-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/WEServiceExtension/WEServiceExtension.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/WebEngage/WebEngage.framework/WebEngage",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WEServiceExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebEngage.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WESE-Example-Pods-Objc/Pods-WESE-Example-Pods-Objc-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D6B0FDF1646E3DE665F33CE7 /* [CP] Embed Pods Frameworks */ = {
@@ -543,6 +745,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CE1F30B92BA18156009C9F0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE1F30BA2BA18156009C9F0D /* ViewController.swift in Sources */,
+				CE1F30BB2BA18156009C9F0D /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE1F30CA2BA181C2009C9F0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE1F30D22BA181C2009C9F0D /* NotificationService.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE284C3B2B9F35C60047FC23 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -571,6 +790,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		CE1F30D52BA181C2009C9F0D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE1F30CD2BA181C2009C9F0D /* PODS-Objc-ServiceExtension */;
+			targetProxy = CE1F30D42BA181C2009C9F0D /* PBXContainerItemProxy */;
+		};
 		CE284C452B9F35C60047FC23 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CE284C3E2B9F35C60047FC23 /* PODS-ServiceExtension */;
@@ -757,9 +981,125 @@
 			};
 			name = Release;
 		};
+		CE1F30C62BA18156009C9F0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F38DDAE33030C0B74DEFAADC /* Pods-WESE-Example-Pods-Objc.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "WESE-Example.entitlements";
+				DEVELOPMENT_TEAM = S7X7V9YPX7;
+				INFOPLIST_FILE = WEServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MODULE_NAME = ExampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.webEngage.prodSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		CE1F30C72BA18156009C9F0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A73F6D449238FD0B3B80DB3 /* Pods-WESE-Example-Pods-Objc.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "WESE-Example.entitlements";
+				DEVELOPMENT_TEAM = S7X7V9YPX7;
+				INFOPLIST_FILE = WEServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MODULE_NAME = ExampleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.webEngage.prodSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		CE1F30D82BA181C2009C9F0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01002D4123D63F99E104FB60 /* Pods-WESE-Example-Pods-Objc-PODS-Objc-ServiceExtension.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = S7X7V9YPX7;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "PODS-Objc-ServiceExtension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "PODS-Objc-ServiceExtension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 CocoaPods. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.webEngage.prodSwift.PODS-Objc-ServiceExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CE1F30D92BA181C2009C9F0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6E5EB12C0722A0798409A238 /* Pods-WESE-Example-Pods-Objc-PODS-Objc-ServiceExtension.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S7X7V9YPX7;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "PODS-Objc-ServiceExtension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "PODS-Objc-ServiceExtension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 CocoaPods. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.webEngage.prodSwift.PODS-Objc-ServiceExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		CE284C482B9F35C60047FC23 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E2829A60B1F01FB30324C655 /* Pods-PODS-ServiceExtension.debug.xcconfig */;
+			baseConfigurationReference = 86EE821C0BE3D5F96BD31FDF /* Pods-WESE-Example-Pods-PODS-ServiceExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -804,7 +1144,7 @@
 		};
 		CE284C492B9F35C60047FC23 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9B1143D99E7C7462F2D3F6C4 /* Pods-PODS-ServiceExtension.release.xcconfig */;
+			baseConfigurationReference = E18571B0E06CCBE36A429EAE /* Pods-WESE-Example-Pods-PODS-ServiceExtension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -852,7 +1192,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "WESE-Example.entitlements";
 				DEVELOPMENT_TEAM = S7X7V9YPX7;
-				INFOPLIST_FILE = "WEServiceExtension_Example copy-Info.plist";
+				INFOPLIST_FILE = WEServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -874,7 +1214,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "WESE-Example.entitlements";
 				DEVELOPMENT_TEAM = S7X7V9YPX7;
-				INFOPLIST_FILE = "WEServiceExtension_Example copy-Info.plist";
+				INFOPLIST_FILE = WEServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -984,6 +1324,24 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		CE1F30C52BA18156009C9F0D /* Build configuration list for PBXNativeTarget "WESE-Example-Pods-Objc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE1F30C62BA18156009C9F0D /* Debug */,
+				CE1F30C72BA18156009C9F0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE1F30D72BA181C2009C9F0D /* Build configuration list for PBXNativeTarget "PODS-Objc-ServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE1F30D82BA181C2009C9F0D /* Debug */,
+				CE1F30D92BA181C2009C9F0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CE284C472B9F35C60047FC23 /* Build configuration list for PBXNativeTarget "PODS-ServiceExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1014,7 +1372,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		CEA460C12B9F4227007D6167 /* XCLocalSwiftPackageReference "../WEServiceExtension" */ = {
+		CEA460C12B9F4227007D6167 /* XCLocalSwiftPackageReference "WEServiceExtension" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../WEServiceExtension;
 		};

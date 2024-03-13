@@ -1,6 +1,0 @@
-framework module Pods_WESE_Example_Pods {
-  umbrella header "Pods-WESE-Example-Pods-umbrella.h"
-
-  export *
-  module * { export * }
-}
