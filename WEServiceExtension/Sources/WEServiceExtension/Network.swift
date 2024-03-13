@@ -132,6 +132,10 @@ struct Network {
                 baseURL = "https://c.ir0.webengage.com/tracker"
             } else if environment?.uppercased() == "UNL" {
                 baseURL = "https://c.unl.webengage.com/tracker"
+            } else if environment?.uppercased() == "KSA" {
+                baseURL = "https://c.ksa.webengage.com/tracker"
+            } else if environment?.uppercased() == "STAGING" {
+                baseURL = "https://c.stg.webengage.biz/tracker"
             }
         }
         

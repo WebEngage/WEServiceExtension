@@ -41,6 +41,7 @@ struct Utils {
         data["app_id"] = defaults.string(forKey: "app_id")
         
         print("Environment: \(defaults.string(forKey: "environment") ?? "")")
+        data["environment"] = defaults.string(forKey: "environment") ?? ""
         return data
     }
     
