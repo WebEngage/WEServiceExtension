@@ -1,0 +1,23 @@
+PODS:
+  - WebEngage (6.6.1)
+  - WEServiceExtension (0.1.0)
+
+DEPENDENCIES:
+  - WebEngage
+  - WEServiceExtension (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - WebEngage
+
+EXTERNAL SOURCES:
+  WEServiceExtension:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  WebEngage: 440e5cd8e5cb5f4d573ef4fd36d74c299e99cae5
+  WEServiceExtension: e75c7f88a628d9d12e556cc04d407fa9cb295a8b
+
+PODFILE CHECKSUM: bdadb7d6fc0564d73e6ba0a52d20b82ab5336a81
+
+COCOAPODS: 1.14.3

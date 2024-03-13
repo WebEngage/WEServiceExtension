@@ -7,6 +7,7 @@
 
 import UserNotifications
 
+@objc
 open class WEXPushNotificationService: UNNotificationServiceExtension {
     
     var contentHandler: ((UNNotificationContent) -> Void)?
