@@ -24,21 +24,21 @@ In Xcode, navigate to `File` > `New` > `Target` and select `Notification Service
 <center><i>1</i></center>
 <img src="./assets/2.png" alt="plot">
 <center><i>2</i></center>
-<img src="./assets/3.png" alt="plot" width="400px">
+<img src="./assets/3.png" alt="plot">
 <center><i>3</i></center>
 
 #### Step 2:
 
 Enter the Product Name as `NotificationService`, and click Finish.
 
-<img src="./assets/4.png" alt="plot" width="400px">
+<img src="./assets/4.png" alt="plot">
 <center><i>4</i></center>
 
 #### Step 3:
 
 Click Activate on the prompt shown to activate the service extension. Xcode will now create a new top-level folder in your project with the name `NotificationService`.
 
-<img src="./assets/5.png" alt="plot" width="400px">
+<img src="./assets/5.png" alt="plot">
 <center><i>5</i></center>
 <br/>
 <center><i>If you not activated by accident, you can switch back to debug your app target (middle-top next to the device selector).</i></center>
