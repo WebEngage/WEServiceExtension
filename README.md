@@ -56,22 +56,28 @@ Steps to add WebEngage Notification Service(WEServiceExtension)
 Select your `Project` > `Package Dependencies` > `+` button.
 Enter Package URL: `https://github.com/WebEngage/WEServiceExtension.git` in the search bar.
 
-<img src="./assets/p1.png" alt="plot" width="400px">
-<img src="./assets/p2.png" alt="plot" width="400px">
-<img src="./assets/p3.png" alt="plot" width="400px">
+<img src="./assets/p1.png" alt="plot">
+<center><i>1</i></center>
+<img src="./assets/p2.png" alt="plot">
+<center><i>2</i></center>
+<img src="./assets/p3.png" alt="plot">
+<center><i>3</i></center>
 
 #### Step 2:
 
 Under `Add to Target` select `NotificationService` (Your Service Extension Target).
 
-<img src="./assets/p4.png" alt="plot" width="400px">
+<img src="./assets/p4.png" alt="plot">
+<center><i>4</i></center>
 
 #### Step 3:
 
 Click `Add Package`.
 
-<img src="./assets/p4.png" alt="plot" width="400px">
-<img src="./assets/p5.png" alt="plot" width="400px">
+<img src="./assets/p4.png" alt="plot">
+<center><i>5</i></center>
+<img src="./assets/p5.png" alt="plot">
+<center><i>6</i></center>
 
 ## License
 
