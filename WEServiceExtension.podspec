@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
     s.documentation_url  = 'https://docs.webengage.com/docs/ios-getting-started'
     s.license          = { :type => 'MIT', :file => 'LICENSE' }
     s.author           = { 'BhaveshWebEngage' => 'bhavesh.sarwar@webengage.com' }
-    s.source           = { :git => 'https://github.com/BhaveshWebEngage/WEServiceExtension.git', :tag => s.version.to_s }
+    s.source           = { :git => 'https://github.com/WebEngage/WEServiceExtension.git', :tag => s.version.to_s }
     s.platform           = :ios
     s.ios.deployment_target = '12.0'
     s.swift_version = '5.0'
