@@ -9,15 +9,15 @@
 
 **Push notification service extensions** in iOS are needed to make notifications more interesting by adding images, videos, or interactive buttons. They also ensure that sensitive tasks, like processing user data, are done securely without affecting the app's performance.
 
-<!-- Start table -->
+## <!-- Start table -->
 
 ### Table of Content
 
 <details>
     <summary>Click to Expand</summary>
 
-- [How to add Service Extension ?](#how-to-add-service-extension)
-- [How to integrate WebEngage into Service Extension ?](#how-to-integrate-webengage-into-service-extension)
+- [How to add Service Extension ?](#how-to-add-service-extension-)
+- [How to integrate WebEngage into Service Extension ?](#how-to-integrate-webengage-into-service-extension-)
   - [Using Swift Package Manager](#using-swift-package-manager)
   - [Using Cocoapods](#using-cocoapods)
 - [Update Service Class](#update-service-class)
@@ -25,12 +25,17 @@
   - [Swift](#swift)
   - [Objective C](#objective-c)
 
+- [Add App Groups](#add-app-groups)
+- [Configure ServiceExtension-Info.plist](#configure-serviceextension-infoplist)
+
   </details>
   <!-- End table -->
 
-<!-- Start Of Step 1 -->
+## <!-- Start Of Step 1 -->
 
 ### How to add Service Extension ?
+
+---
 
 #### Step 1:
 
@@ -59,6 +64,8 @@ Click Activate on the prompt shown to activate the service extension. Xcode will
 <!-- Start of  -->
 
 ### How to integrate WebEngage into Service Extension ?
+
+---
 
 There are two ways to do this.
 
@@ -94,9 +101,9 @@ Click `Add Package`.
 
 ![p5](./assets/p5.png)
 
-<hr>
-
 ### Using Cocoapods
+
+---
 
 Open `Podfile` and add WebEngage to the `NotificationService` target:
 
@@ -122,6 +129,8 @@ pod install
 <hr>
 
 ## Update Service Class
+
+---
 
 ### Swift
 
@@ -181,8 +190,46 @@ NotificationService.m
 @end
 ```
 
+### Add App Groups
+
+---
+
+App Groups allow your app and the WebEngageNotificationServiceExtension to communicate when a notification is received, even if your app is not active. This is required for Confirmed Deliveries.
+
+Select your `Main App Target` > `Signing & Capabilitie`s > `+ Capability` > `App Groups`.
+
+![ag1](./assets/appGroup/1.png)
+
+Within `App Groups`, click the `+` button.
+
+![ag2](./assets/appGroup/2.png)
+
+Set the App Groups container to be group.YOUR_BUNDLE_IDENTIFIER.WEGNotificationGroup where YOUR_BUNDLE_IDENTIFIER is the same as your Main Application "Bundle Identifier".
+
+![ag3](./assets/appGroup/3.png)
+
+Press `OK` and repeat for the **`NotificationService`** Target.
+
+<hr>
+
+## Configure ServiceExtension-Info.plist
+
+### Step 1:
+
+Add `App Transport Security Settings` key under `Information Property List` in `NotificationService Info.plist` files.
+
+### Step 2:
+
+Set `Allow Arbitrary` Loads to `YES` under `App Transport Security Settings`
+
+- Not required if you are sure that image URLs provided on `WebEngage` dashboard will always use `https`.
+
+![ag4](./assets/appGroup/4.png)
+
 ## License
 
 WEServiceExtension is available under the MIT license. See the LICENSE file for more info.
+
+###
 
 <!-- End Of ******************************** -->
