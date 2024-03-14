@@ -7,78 +7,89 @@
 
 ---
 
-## Installation
+**Push notification service extensions** in iOS are needed to make notifications more interesting by adding images, videos, or interactive buttons. They also ensure that sensitive tasks, like processing user data, are done securely without affecting the app's performance.
 
-WEServiceExtension is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following below :
+<!-- Start table -->
 
-## Notification Service Extension Setup
+### Table of Content
 
-### Add Notification Service Extension
+<details>
+    <summary>Click to Expand</summary>
+
+- [How to add Service Extension ?](#how_to_add_service_extension)
+- [How to integrate WebEngage into Service Extension ?](#how-to-integrate-webengage-into-service-extension)
+  - [Using Swift Package Manager]()
+  - [Using Cocoapods]()
+  </details>
+  <!-- End table -->
+
+<!-- Start Of Step 1 -->
+
+### How to add Service Extension ?
 
 #### Step 1:
 
 In Xcode, navigate to `File` > `New` > `Target` and select `Notification Service Extension` then `Next`
 
-<img src="./assets/1.png" alt="plot">
-<center><i>1</i></center>
-<img src="./assets/2.png" alt="plot">
-<center><i>2</i></center>
-<img src="./assets/3.png" alt="plot">
-<center><i>3</i></center>
+<!-- ![2](./assets/2.png) -->
 
-#### Step 2:
+<!-- ![3](./assets/3.png) -->
+
+#### Step 2
 
 Enter the Product Name as `NotificationService`, and click Finish.
 
-<img src="./assets/4.png" alt="plot">
-<center><i>4</i></center>
+<!-- ![4](./assets/4.png) -->
 
-#### Step 3:
+#### Step 3
 
 Click Activate on the prompt shown to activate the service extension. Xcode will now create a new top-level folder in your project with the name `NotificationService`.
 
-<img src="./assets/5.png" alt="plot">
-<center><i>5</i></center>
-<br/>
-<center><i>If you not activated by accident, you can switch back to debug your app target (middle-top next to the device selector).</i></center>
+<!-- ![5](./assets/5.png) -->
 
----
+<!-- End of Step 1 -->
 
-### Add WebEngage Service Extensions (WEServiceExtension) to the respective Targets
+<hr>
 
----
+<!-- Start of  -->
 
-Steps to add WebEngage Notification Service(WEServiceExtension)
+### How to integrate WebEngage into Service Extension ?
+
+There are two ways to do this.
+
+1. [Using Swift Package Manager]()
+2. [Using Cocoapods]()
+
+### Using Swift Package Manager
 
 #### Step 1:
 
 Select your `Project` > `Package Dependencies` > `+` button.
 Enter Package URL: `https://github.com/WebEngage/WEServiceExtension.git` in the search bar.
 
-<img src="./assets/p1.png" alt="plot">
-<center><i>1</i></center>
-<img src="./assets/p2.png" alt="plot">
-<center><i>2</i></center>
-<img src="./assets/p3.png" alt="plot">
-<center><i>3</i></center>
+```
+https://github.com/WebEngage/WEServiceExtension.git
+```
+
+<!-- ![p1](./assets/p1.png) -->
+<!-- ![p2](./assets/p2.png) -->
+<!-- ![p3](./assets/p3.png) -->
 
 #### Step 2:
 
 Under `Add to Target` select `NotificationService` (Your Service Extension Target).
 
-<img src="./assets/p4.png" alt="plot">
-<center><i>4</i></center>
+<!-- ![p4](./assets/p4.png) -->
 
 #### Step 3:
 
 Click `Add Package`.
 
-<img src="./assets/p4.png" alt="plot">
-<center><i>5</i></center>
-<img src="./assets/p5.png" alt="plot">
-<center><i>6</i></center>
+<!-- ![p5](./assets/p5.png) -->
+<!-- ![p6](./assets/p6.png) -->
 
 ## License
 
 WEServiceExtension is available under the MIT license. See the LICENSE file for more info.
+
+<!-- End Of ******************************** -->
