@@ -35,8 +35,6 @@
 
 ### How to add Service Extension ?
 
----
-
 #### Step 1:
 
 In Xcode, navigate to `File` > `New` > `Target` and select `Notification Service Extension` then `Next`
@@ -64,8 +62,6 @@ Click Activate on the prompt shown to activate the service extension. Xcode will
 <!-- Start of  -->
 
 ### How to integrate WebEngage into Service Extension ?
-
----
 
 There are two ways to do this.
 
@@ -103,8 +99,6 @@ Click `Add Package`.
 
 ### Using Cocoapods
 
----
-
 Open `Podfile` and add WebEngage to the `NotificationService` target:
 
 ```ruby
@@ -129,8 +123,6 @@ pod install
 <hr>
 
 ## Update Service Class
-
----
 
 ### Swift
 
@@ -191,8 +183,6 @@ NotificationService.m
 ```
 
 ### Add App Groups
-
----
 
 App Groups allow your app and the WebEngageNotificationServiceExtension to communicate when a notification is received, even if your app is not active. This is required for Confirmed Deliveries.
 
