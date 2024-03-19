@@ -16,205 +16,252 @@
 <details>
     <summary>Click to Expand</summary>
 
-- [How to add Service Extension ?](#how-to-add-service-extension-)
-- [How to integrate WebEngage into Service Extension ?](#how-to-integrate-webengage-into-service-extension-)
-  - [Using Swift Package Manager](#using-swift-package-manager)
-  - [Using Cocoapods](#using-cocoapods)
-- [Update Service Class](#update-service-class)
+- [Create content extension for Project](#step-1--create-content-extension-for-project)
+- [Integrate WEServiceExtension inside Service Extension](#step-2--integrate-weserviceextension-inside-service-extension)
+  - [Approach 1 : SPM](#approach-1--integrating-via-spm)
+  - [Approach 2 : Cocoapods](#approach-2--integrating-via-cocoapods)
+- [Import and Use the WebEngage inside Service Extension](#step-3--import-and-use-the-webengage-inside-service-extension)
 
   - [Swift](#swift)
   - [Objective C](#objective-c)
 
-- [Add App Groups](#add-app-groups)
-- [Configure ServiceExtension-Info.plist](#configure-serviceextension-infoplist)
+- [Configure ServiceExtension-Info.plist](#step-4--configure-serviceextension-infoplist)
+- [Add App Groups](#step-5--create-app-groups-for-all-targets)
 
   </details>
   <!-- End table -->
 
 ## <!-- Start Of Step 1 -->
 
-### How to add Service Extension ?
+## Prerequisites
 
-#### Step 1:
+- WebEngage SDK needs to be integrated inside project
+- Basic knowledge of Service Extension and Content Extension
+- Basic knowledge about push notification , swift / Objc Programing Language
 
-In Xcode, navigate to `File` > `New` > `Target` and select `Notification Service Extension` then `Next`
+---
 
-![2](./assets/2.png)
+- ## **_Step 1 :_** Create content extension for Project
 
-![3](./assets/3.png)
+  - In Xcode, navigate to `File` > `New` > `Target` and select `Notification Service Extension` then `Next`
 
-#### Step 2
+  - Enter the Product Name as `NotificationService`, and click Finish.
 
-Enter the Product Name as `NotificationService`, and click Finish.
+  - Click Activate on the prompt shown to activate the service extension. Xcode will now create a new top-level folder in your project with the name `NotificationService`.
 
-![4](./assets/4.png)
+  - #### **_Screenshots_**
 
-#### Step 3
+    <p align="center">
+      <img src="./assets/2.png" alt="Screenshot 1" width="1000">
+    </p>
+    <h5 align="center">Screenshot 1</h5>
 
-Click Activate on the prompt shown to activate the service extension. Xcode will now create a new top-level folder in your project with the name `NotificationService`.
+    <p align="center">
+      <img src="./assets/3.png" alt="Screenshot 2" width="1000">
+    </p>
+    <h5 align="center">Screenshot 2</h5>
 
-![5](./assets/5.png)
+    <p align="center">
+      <img src="./assets/4.png" alt="Screenshot 3" width="1000">
+    </p>
+    <h5 align="center">Screenshot 3</h5>
+
+    <p align="center">
+      <img src="./assets/5.png" alt="Screenshot 4" width="1000">
+    </p>
+    <h5 align="center">Screenshot 4</h5>
 
 <!-- End of Step 1 -->
 
-<hr>
+---
 
 <!-- Start of  -->
 
-### How to integrate WebEngage into Service Extension ?
+- ### **_Step 2 :_** Integrate WEServiceExtension inside Service Extension
 
-There are two ways to do this.
+  There are 2 common methods for integrating a library inside a Content Extension:
 
-1. [Using Swift Package Manager]()
-2. [Using Cocoapods]()
+  ### Note: Choose Either SPM or CocoaPods
 
-<hr>
+  > _It's recommended to choose either Swift Package Manager or CocoaPods for integrating the library into your Content Extension. Mixing both methods might lead to conflicts or inconsistencies in your project setup._
 
-### Using Swift Package Manager
+  ***
 
-#### Step 1:
+  ### **<u>Approach 1</u> :** Integrating via **_SPM_**
 
-Select your `Project` > `Package Dependencies` > `+` button.
-Enter Package URL: `https://github.com/WebEngage/WEServiceExtension.git` in the search bar.
+  - Select your `Project` > `Package Dependencies` > `+` button.
+    Enter Package URL: `https://github.com/WebEngage/WEServiceExtension.git` in the search bar.
 
-```
-https://github.com/WebEngage/WEServiceExtension.git
-```
+    ```
+    https://github.com/WebEngage/WEServiceExtension.git
+    ```
 
-![p1](./assets/p1.png)
-![p2](./assets/p2.png)
-![p3](./assets/p3.png)
+    <br>
+    <p align="center">
+    <img src="./assets/p1.png" alt="Screenshot 1 (SPM)" width="1000">
+    </p>
+    <h5 align="center">Screenshot 1 (SPM)</h5>
 
-#### Step 2:
+    <p align="center">
+    <img src="./assets/p2.png" alt="Screenshot 2 (SPM)" width="1000">
+    </p>
+    <h5 align="center">Screenshot 2 (SPM)</h5>
 
-Under `Add to Target` select `NotificationService` (Your Service Extension Target).
+    <p align="center">
+    <img src="./assets/p3.png" alt="Screenshot 3 (SPM)" width="1000">
+    </p>
+    <h5 align="center">Screenshot 3 (SPM)</h5>
 
-![p4](./assets/p4.png)
+  - Under `Add to Target` select `NotificationService` (Your Service Extension Target).
+  <br><br>
+     <p align="center">
+      <img src="./assets/p4.png" alt="Screenshot 4 (SPM)" width="1000">
+      </p>
+      <h5 align="center">Screenshot 4 (SPM)</h5>
 
-#### Step 3:
+  - Click `Add Package`.
+  <br><br>
+    <p align="center">
+    <img src="./assets/p5.png" alt="Screenshot 5 (SPM)" width="1000">
+    </p>
+    <h5 align="center">Screenshot 5 (SPM)</h5>
 
-Click `Add Package`.
+### **<u>Approach 2</u> :** Integrating via **_CocoaPods_**
 
-![p5](./assets/p5.png)
+- #### Prerequisites
 
-### Using Cocoapods
+  - Cocoapods should be installed inside your system
 
-Open `Podfile` and add WebEngage to the `NotificationService` target:
+  - podfile should be available for your project
 
-```ruby
-target 'NotificationService' do
-    # Uncomment the line below if the parent target also uses frameworks
-    # use_frameworks!
+- #### Edit Podfile
 
-    pod 'WEServiceExtension'
-    # Add other pods for the NotificationService target here
-end
+  - Open the Podfile using a text editor.
 
-```
+  - Add the library dependency to the Podfile. For example:
 
-Now, navigate to your iOS project directory in the terminal and execute:
+    ```ruby
+    # this target name should be your ServiceExtension Name
+    target 'NotificationService' do
+      # Uncomment the line below if the parent target also uses frameworks
+      # use_frameworks!
+      pod 'WEServiceExtension'
+      # Add other pods for the NotificationService target here
+    end
+    ```
 
-```shell
-pod install
-```
+    Note : Your target name should be the Content Extension name which you have entered while creating ContentExtension, Over here refer screenshot 3
 
-<!--  -->
+  - #### Install Pods
 
-<hr>
+    - Save the changes to the Podfile.
 
-## Update Service Class
+    - Install the pods by running the following command:
+      ```shell
+      pod install
+      ```
 
-### Swift
+---
 
-```swift
-import UserNotifications
-// Step 1 : Importing WEServiceExtension
-import WEServiceExtension
+- ### **_Step 3 :_** Import and Use the WebEngage inside Service Extension
 
-// Step 2 : Subclassing service Extension
-class NotificationService: WEXPushNotificationService {
-}
+  - #### SWIFT
 
-```
+    1.  Open **NotificationService.swift**
+    2.  Import **WEServiceExtension** by adding code `import WEServiceExtension`
+    3.  Remove all existing code from the class `NotificationService`
+    4.  Add subclassing to `NotificationService` with `WEXPushNotificationService`
 
-### Objective-C
+        ```swift
+        import UserNotifications
+        // Step 1 : Importing WEServiceExtension
+        import WEServiceExtension
 
-NotificationService.h
+        // Step 2 : Subclassing service Extension
+        class NotificationService: WEXPushNotificationService {
+        }
 
-```Objective-C
-#import <UserNotifications/UserNotifications.h>
+        ```
 
-@interface NotificationService : UNNotificationServiceExtension
+  - #### Objective C
 
-@end
-```
+    1.  Open **NotificationService.m**
+    2.  Import `WEServiceExtension/WEServiceExtension-Swift.h`
+    3.  Create Object of `WEXPushNotificationService`
+    4.  Pass necessary information to `WebEngage` through above created object
 
-NotificationService.m
+    `NotificationService.m` will look like below code snippet
 
-```Objective-C
-#import "NotificationService.h"
-// Step 1 : Importing WEServiceExtension
-#import <WEServiceExtension/WEServiceExtension-Swift.h>
+    ```Objective-C
+    #import "NotificationService.h"
+      // Step 1 : Importing WEServiceExtension
+      #import <WEServiceExtension/WEServiceExtension-Swift.h>
 
-@interface NotificationService ()
-// Step 2 : Creating Object of service Extension
-@property (nonatomic, strong) WEXPushNotificationService *serviceExtension;
+      @interface NotificationService ()
+      // Step 2 : Creating Object of service Extension
+      @property (nonatomic, strong) WEXPushNotificationService *serviceExtension;
 
-@end
+      @end
 
-@implementation NotificationService
+      @implementation NotificationService
 
-// Step 3 : Pass necessary information to WebEngage
-- (void)didReceiveNotificationRequest:(UNNotificationRequest *)request withContentHandler:(void (^)(UNNotificationContent * _Nonnull))contentHandler {
-    if (_serviceExtension == NULL){
-        _serviceExtension = [[WEXPushNotificationService alloc]init];
-    }
-    [_serviceExtension didReceiveNotificationRequest:request
-                                  withContentHandler:contentHandler];
-}
+      // Step 3 : Pass necessary information to WebEngage
+      - (void)didReceiveNotificationRequest:(UNNotificationRequest *)request withContentHandler:(void (^)(UNNotificationContent * _Nonnull))contentHandler {
+          if (_serviceExtension == NULL){
+              _serviceExtension = [[WEXPushNotificationService alloc]init];
+          }
+          [_serviceExtension didReceiveNotificationRequest:request
+                                        withContentHandler:contentHandler];
+      }
 
-- (void)serviceExtensionTimeWillExpire {
-    // Called just before the extension will be terminated by the system.
-    // Use this as an opportunity to deliver your "best attempt" at modified content, otherwise the original push payload will be used.
-    [_serviceExtension serviceExtensionTimeWillExpire];
-}
+      - (void)serviceExtensionTimeWillExpire {
+          // Called just before the extension will be terminated by the system.
+          // Use this as an opportunity to deliver your "best attempt" at modified content, otherwise the original push payload will be used.
+          [_serviceExtension serviceExtensionTimeWillExpire];
+      }
 
-@end
-```
+      @end
+    ```
 
-### Add App Groups
+- ### **_Step 4 :_** Configure ServiceExtension-Info.plist
 
-App Groups allow your app and the WebEngageNotificationServiceExtension to communicate when a notification is received, even if your app is not active. This is required for Confirmed Deliveries.
+  Here's how you can go about it:
 
-Select your `Main App Target` > `Signing & Capabilitie`s > `+ Capability` > `App Groups`.
+  - Open the `Info.plist` file for `NotificationService`
+  - Add `App Transport Security Settings` key under `Information Property List` in `NotificationService-Info.plist` file.
+  - Set `Allow Arbitrary` Loads to `YES` under `App Transport Security Settings` - Not required if you are sure that image URLs provided on `WebEngage` dashboard will always use `https`.
+  <br><br>
+    <p align="center">
+    <img src="./assets/appGroup/4.png" alt="Screenshot 1" width="1000">
+    </p>
+    <h5 align="center">Screenshot 1</h5>
 
-![ag1](./assets/appGroup/1.png)
+- ### **_Step 5 :_** Create App Groups for all Targets
 
-Within `App Groups`, click the `+` button.
+  App Groups allow your app and the WebEngageNotificationServiceExtension to communicate when a notification is received, even if your app is not active. This is required for Confirmed Deliveries.
 
-![ag2](./assets/appGroup/2.png)
+  - Select your `Main App Target` > `Signing & Capabilitie`s > `+ Capability` > `App Groups`.
+  - Within `App Groups`, click the `+` button.
+  - Set the App Groups container to be `group.YOUR_BUNDLE_IDENTIFIER.WEGNotificationGroup` where `YOUR_BUNDLE_IDENTIFIER` is the same as your Main Application "`Bundle Identifier`".
+  - Press `OK` and repeat for the **`NotificationService`** Target.
+  - #### **_Screenshots_**
+    <br><br>
+      <p align="center">
+      <img src="./assets/appGroup/1.png" alt="Screenshot 1" width="1000">
+      </p>
+      <h5 align="center">Screenshot 1</h5>
+      <br><br>
+      <p align="center">
+      <img src="./assets/appGroup/2.png" alt="Screenshot 1" width="1000">
+      </p>
+      <h5 align="center">Screenshot 2</h5>
+      <br><br>
+      <p align="center">
+      <img src="./assets/appGroup/3.png" alt="Screenshot 1" width="1000">
+      </p>
+      <h5 align="center">Screenshot 3</h5>
 
-Set the App Groups container to be group.YOUR_BUNDLE_IDENTIFIER.WEGNotificationGroup where YOUR_BUNDLE_IDENTIFIER is the same as your Main Application "Bundle Identifier".
-
-![ag3](./assets/appGroup/3.png)
-
-Press `OK` and repeat for the **`NotificationService`** Target.
-
-<hr>
-
-## Configure ServiceExtension-Info.plist
-
-### Step 1:
-
-Add `App Transport Security Settings` key under `Information Property List` in `NotificationService Info.plist` files.
-
-### Step 2:
-
-Set `Allow Arbitrary` Loads to `YES` under `App Transport Security Settings`
-
-- Not required if you are sure that image URLs provided on `WebEngage` dashboard will always use `https`.
-
-![ag4](./assets/appGroup/4.png)
+---
 
 ## License
 
