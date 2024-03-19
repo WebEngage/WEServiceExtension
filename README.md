@@ -16,7 +16,7 @@
 <details>
     <summary>Click to Expand</summary>
 
-- [Create content extension for Project](#step-1--create-content-extension-for-project)
+- [Create service extension for Project](#step-1--create-service-extension-for-project)
 - [Integrate WEServiceExtension inside Service Extension](#step-2--integrate-weserviceextension-inside-service-extension)
   - [Approach 1 : SPM](#approach-1--integrating-via-spm)
   - [Approach 2 : Cocoapods](#approach-2--integrating-via-cocoapods)
@@ -41,7 +41,7 @@
 
 ---
 
-- ## **_Step 1 :_** Create content extension for Project
+- ## **_Step 1 :_** Create service extension for Project
 
   - In Xcode, navigate to `File` > `New` > `Target` and select `Notification Service Extension` then `Next`
 
@@ -79,11 +79,11 @@
 
 - ### **_Step 2 :_** Integrate WEServiceExtension inside Service Extension
 
-  There are 2 common methods for integrating a library inside a Content Extension:
+  There are 2 common methods for integrating a library inside a Service Extension:
 
   ### Note: Choose Either SPM or CocoaPods
 
-  > _It's recommended to choose either Swift Package Manager or CocoaPods for integrating the library into your Content Extension. Mixing both methods might lead to conflicts or inconsistencies in your project setup._
+  > _It's recommended to choose either Swift Package Manager or CocoaPods for integrating the library into your Service Extension. Mixing both methods might lead to conflicts or inconsistencies in your project setup._
 
   ***
 
@@ -150,7 +150,7 @@
       end
       ```
 
-      Note : Your target name should be the Content Extension name which you have entered while creating ContentExtension, Over here refer screenshot 3
+      Note : Your target name should be the Service Extension name which you have entered while creating ServiceExtension, Over here refer screenshot 3
 
     - #### Install Pods
 
