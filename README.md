@@ -126,40 +126,40 @@
     </p>
     <h5 align="center">Screenshot 5 (SPM)</h5>
 
-### **<u>Approach 2</u> :** Integrating via **_CocoaPods_**
+  ### **<u>Approach 2</u> :** Integrating via **_CocoaPods_**
 
-- #### Prerequisites
+  - #### Prerequisites
 
-  - Cocoapods should be installed inside your system
+    - Cocoapods should be installed inside your system
 
-  - podfile should be available for your project
+    - podfile should be available for your project
 
-- #### Edit Podfile
+  - #### Edit Podfile
 
-  - Open the Podfile using a text editor.
+    - Open the Podfile using a text editor.
 
-  - Add the library dependency to the Podfile. For example:
+    - Add the library dependency to the Podfile. For example:
 
-    ```ruby
-    # this target name should be your ServiceExtension Name
-    target 'NotificationService' do
-      # Uncomment the line below if the parent target also uses frameworks
-      # use_frameworks!
-      pod 'WEServiceExtension'
-      # Add other pods for the NotificationService target here
-    end
-    ```
-
-    Note : Your target name should be the Content Extension name which you have entered while creating ContentExtension, Over here refer screenshot 3
-
-  - #### Install Pods
-
-    - Save the changes to the Podfile.
-
-    - Install the pods by running the following command:
-      ```shell
-      pod install
+      ```ruby
+      # this target name should be your ServiceExtension Name
+      target 'NotificationService' do
+        # Uncomment the line below if the parent target also uses frameworks
+        # use_frameworks!
+        pod 'WEServiceExtension'
+        # Add other pods for the NotificationService target here
+      end
       ```
+
+      Note : Your target name should be the Content Extension name which you have entered while creating ContentExtension, Over here refer screenshot 3
+
+    - #### Install Pods
+
+      - Save the changes to the Podfile.
+
+      - Install the pods by running the following command:
+        ```shell
+        pod install
+        ```
 
 ---
 
