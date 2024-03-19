@@ -27,6 +27,7 @@
 
 - [Configure ServiceExtension-Info.plist](#step-4--configure-serviceextension-infoplist)
 - [Add App Groups](#step-5--create-app-groups-for-all-targets)
+- [Build and Test](#step-6--build-and-test)
 
   </details>
   <!-- End table -->
@@ -263,10 +264,16 @@
 
 ---
 
+- ### **_Step 6 :_** Build and Test
+
+  - Build your project to ensure that the library integrates successfully.
+
+  - Test your Service Extension to ensure that it functions as expected with the integrated library.
+
+---
+
 ## License
 
 WEServiceExtension is available under the MIT license. See the LICENSE file for more info.
 
 ###
-
-<!-- End Of ******************************** -->
