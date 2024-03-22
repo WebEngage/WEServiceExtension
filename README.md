@@ -128,6 +128,12 @@
     </p>
     <h5 align="center">Screenshot 5 (SPM)</h5>
 
+  ***
+
+    <h5 align="center">OR</h5>
+
+  ***
+
   ### **<u>Approach 2</u> :** Integrating via **_CocoaPods_**
 
   - #### Prerequisites
@@ -273,16 +279,16 @@
 
 ---
 
-- ### Migration from Older Service Extension
+- ### Migration from WebEngageBannerPush to WEServiceExtension
 
   - If you've been using the old service extension and want to switch to the new one, just stick to these instructions in the documentation:
 
-  - Below are the steps to migrate from the older Service Extension to the new Service Extension:
+  - Below are the steps to migrate from WebEngageBannerPush to the WEServiceExtension:
 
-    - Remove `pod 'WebEngageBannerPush'` from the Target `NotificationService` in the podfile.
+    - Remove `pod 'WebEngageBannerPush'` from the Service Extension Target `NotificationService` in the podfile.
     - Then Perform `pod install`
-    - Follow Step 2 [Import and Use the WebEngage inside Service Extension](#step-3--import-and-use-the-webengage-inside-service-extension)
-    - After successfully completing `step 2`, let's move to the code section:
+    - Then Follow Step [Approach 2 : Cocoapods](#approach-2--integrating-via-cocoapods)
+    - After successfully completing the above step, let's move to the code section:
 
       - #### For Swift Users :
 
