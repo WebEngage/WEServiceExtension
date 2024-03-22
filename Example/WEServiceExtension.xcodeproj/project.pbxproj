@@ -1369,8 +1369,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/WebEngage/WEServiceExtension/";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = exactVersion;
+				version = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
