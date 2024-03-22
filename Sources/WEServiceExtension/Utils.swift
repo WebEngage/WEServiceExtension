@@ -11,7 +11,7 @@ import Foundation
 struct Utils {
     
     /// The version of the service extension.
-    static let WEX_SERVICE_EXTENSION_VERSION = "1.1.0"
+    static let WEX_SERVICE_EXTENSION_VERSION = "1.0.0"
     
     /// Get the current time in a formatted string.
     ///
@@ -83,9 +83,10 @@ struct Utils {
             sharedDefaults?.synchronize()
         }
         
-        if sharedDefaults?.value(forKey: "WEG_Service_Extension_Version") == nil {
-            sharedDefaults?.setValue(WEX_SERVICE_EXTENSION_VERSION, forKey: "WEG_Service_Extension_Version")
-            sharedDefaults?.synchronize()
-        }
+        // for SPM Code it will be saved under : WEServiceExtension_version
+        // for WebEngageBannerPush it will be saved under : WEG_Service_Extension_Version
+        sharedDefaults?.setValue(WEX_SERVICE_EXTENSION_VERSION, forKey: "WEServiceExtension_version")
+        sharedDefaults?.synchronize()
     }
 }
+
