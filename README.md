@@ -28,6 +28,7 @@
 - [Configure ServiceExtension-Info.plist](#step-4--configure-serviceextension-infoplist)
 - [Add App Groups](#step-5--create-app-groups-for-all-targets)
 - [Build and Test](#step-6--build-and-test)
+- [Migration from Older Service Extension](#migration-from-older-service-extension)
 
   </details>
   <!-- End table -->
@@ -271,6 +272,30 @@
   - Test your Service Extension to ensure that it functions as expected with the integrated library.
 
 ---
+
+- ### Migration from Older Service Extension
+
+  - If you've been using the old service extension and want to switch to the new one, just stick to these instructions in the documentation:
+
+  - Below are the steps to migrate from the older Service Extension to the new Service Extension:
+
+    - Remove `pod 'WebEngageBannerPush'` from the Target `NotificationService` in the podfile.
+    - Then Perform `pod install`
+    - Follow Step 2 [Import and Use the WebEngage inside Service Extension](#step-3--import-and-use-the-webengage-inside-service-extension)
+    - After successfully completing `step 2`, let's move to the code section:
+
+      - #### For Swift Users :
+
+        - Open the `NotificationService.swift` file.
+        - Replace `import WebEngageBannerPush` with `import WEServiceExtension`.
+        - Done
+
+      - #### For Objective-C Users:
+        - Open the NotificationService.h file.
+        - Remove the import statement `#import <WebEngageBannerPush/WEXPushNotificationService.h>`.
+        - Replace `WEXPushNotificationService` with `UNNotificationServiceExtension`.
+        - Open the `NotificationService.m` file.
+        - Replace the code as given in Step [Objective C](#objective-c)
 
 ## License
 
