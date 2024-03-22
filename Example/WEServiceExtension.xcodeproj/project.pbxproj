@@ -32,7 +32,7 @@
 		CE284C682B9F38330047FC23 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		CE284C7D2B9F3C190047FC23 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE284C7C2B9F3C190047FC23 /* NotificationService.swift */; };
 		CE284C812B9F3C190047FC23 /* SPM-ServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CE284C7A2B9F3C190047FC23 /* SPM-ServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		CE8DDB562BA1C2C300B9041B /* WEServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = CE8DDB552BA1C2C300B9041B /* WEServiceExtension */; };
+		CE6341372BA1DA0C00E26872 /* WEServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = CE6341362BA1DA0C00E26872 /* WEServiceExtension */; };
 		DC769FB774E0EE10E5503977 /* Pods_WESE_Example_Pods_Objc_PODS_Objc_ServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD5DD80D0DBE81B7581B6EF /* Pods_WESE_Example_Pods_Objc_PODS_Objc_ServiceExtension.framework */; };
 		F080AD5BF62CA3DC29499A98 /* Pods_WESE_Example_SPM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 628BAB79228E0F47A1A39F7C /* Pods_WESE_Example_SPM.framework */; };
 /* End PBXBuildFile section */
@@ -192,7 +192,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE8DDB562BA1C2C300B9041B /* WEServiceExtension in Frameworks */,
+				CE6341372BA1DA0C00E26872 /* WEServiceExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,7 +440,7 @@
 			);
 			name = "SPM-ServiceExtension";
 			packageProductDependencies = (
-				CE8DDB552BA1C2C300B9041B /* WEServiceExtension */,
+				CE6341362BA1DA0C00E26872 /* WEServiceExtension */,
 			);
 			productName = "SPM-ServiceExtension";
 			productReference = CE284C7A2B9F3C190047FC23 /* SPM-ServiceExtension.appex */;
@@ -470,7 +470,7 @@
 						ProvisioningStyle = Automatic;
 					};
 					CE284C5C2B9F38330047FC23 = {
-						LastSwiftMigration = "";
+						LastSwiftMigration = 1530;
 					};
 					CE284C792B9F3C190047FC23 = {
 						CreatedOnToolsVersion = 15.3;
@@ -479,16 +479,15 @@
 			};
 			buildConfigurationList = 607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "WEServiceExtension" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
 			mainGroup = 607FACC71AFB9204008FA782;
 			packageReferences = (
-				CE8DDB542BA1C2C300B9041B /* XCRemoteSwiftPackageReference "WEServiceExtension" */,
+				CE6341352BA1DA0C00E26872 /* XCRemoteSwiftPackageReference "WEServiceExtension" */,
 			);
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
 			projectDirPath = "";
@@ -1196,7 +1195,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.webEngage.prodSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1218,7 +1217,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.webEngage.prodSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -1366,7 +1365,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CE8DDB542BA1C2C300B9041B /* XCRemoteSwiftPackageReference "WEServiceExtension" */ = {
+		CE6341352BA1DA0C00E26872 /* XCRemoteSwiftPackageReference "WEServiceExtension" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/WebEngage/WEServiceExtension/";
 			requirement = {
@@ -1377,9 +1376,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CE8DDB552BA1C2C300B9041B /* WEServiceExtension */ = {
+		CE6341362BA1DA0C00E26872 /* WEServiceExtension */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CE8DDB542BA1C2C300B9041B /* XCRemoteSwiftPackageReference "WEServiceExtension" */;
+			package = CE6341352BA1DA0C00E26872 /* XCRemoteSwiftPackageReference "WEServiceExtension" */;
 			productName = WEServiceExtension;
 		};
 /* End XCSwiftPackageProductDependency section */
