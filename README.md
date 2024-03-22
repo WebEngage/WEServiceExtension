@@ -28,7 +28,7 @@
 - [Configure ServiceExtension-Info.plist](#step-4--configure-serviceextension-infoplist)
 - [Add App Groups](#step-5--create-app-groups-for-all-targets)
 - [Build and Test](#step-6--build-and-test)
-- [Migration from Older Service Extension](#migration-from-older-service-extension)
+- [Migration from WebEngageBannerPush to WEServiceExtension](#migration-from-webengagebannerpush-to-weserviceextension)
 
   </details>
   <!-- End table -->
