@@ -71,7 +71,8 @@ struct Network {
     ///   - bestAttemptContent: The best attempt notification content.
     ///   - contentHandler: A closure for handling the notification content.
     static func trackEvent(completion: (() -> Void)?, bestAttemptContent: UNMutableNotificationContent?, contentHandler: ((UNNotificationContent) -> Void)?) {
-        if let requestForEventReceived = getRequestForTracker(eventName: "push_notification_received", bestAttemptContent: bestAttemptContent) {
+        if var requestForEventReceived = getRequestForTracker(eventName: "push_notification_received", bestAttemptContent: bestAttemptContent) {
+            Utils.setDomainURL(urlrequest: &requestForEventReceived)
             URLSession.shared.dataTask(with: requestForEventReceived) { data, response, error in
                 if let error = error {
                     print("Could not log push_notification_received event with error: \(error)")
@@ -83,7 +84,8 @@ struct Network {
             }.resume()
         }
         
-        if let requestForEventView = getRequestForTracker(eventName: "push_notification_view", bestAttemptContent: bestAttemptContent) {
+        if var requestForEventView = getRequestForTracker(eventName: "push_notification_view", bestAttemptContent: bestAttemptContent) {
+            Utils.setDomainURL(urlrequest: &requestForEventView)
             URLSession.shared.dataTask(with: requestForEventView) { data, response, error in
                 if let error = error {
                     print("Could not log push_notification_view event with error: \(error)")

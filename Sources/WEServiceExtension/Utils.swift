@@ -12,6 +12,7 @@ struct Utils {
     
     /// The version of the service extension.
     static let WEX_SERVICE_EXTENSION_VERSION = "1.0.0"
+    static var PROXY_DOMAIN : String?
     
     /// Get the current time in a formatted string.
     ///
@@ -39,6 +40,11 @@ struct Utils {
             data["sdk_version"] = String(intValue)
         }
         data["app_id"] = defaults.string(forKey: "app_id")
+        data["proxy_domain"] = defaults.string(forKey: "proxy_domain")
+        if let proxyDomain = data["proxy_domain"]{
+            PROXY_DOMAIN = proxyDomain
+        }
+       
         
         print("Environment: \(defaults.string(forKey: "environment") ?? "")")
         data["environment"] = defaults.string(forKey: "environment") ?? ""
@@ -87,6 +93,17 @@ struct Utils {
         // for WebEngageBannerPush it will be saved under : WEG_Service_Extension_Version
         sharedDefaults?.setValue(WEX_SERVICE_EXTENSION_VERSION, forKey: "WEServiceExtension_version")
         sharedDefaults?.synchronize()
+    }
+    
+    static func setDomainURL(urlrequest:inout URLRequest){
+        if let urlStr = urlrequest.url?.absoluteString,
+           let proxy = PROXY_DOMAIN,proxy != "",
+           !urlStr.contains(proxy){
+            if let encodedUrl = urlStr.addingPercentEncoding(withAllowedCharacters: .urlUserAllowed),
+               let newURL = URL(string: "https://\(proxy)?url=\(encodedUrl)") {
+                urlrequest.url = newURL
+            }
+        }
     }
 }
 
