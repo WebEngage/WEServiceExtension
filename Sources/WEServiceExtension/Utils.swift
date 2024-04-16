@@ -12,7 +12,7 @@ struct Utils {
     
     /// The version of the service extension.
     static let WEX_SERVICE_EXTENSION_VERSION = "1.0.0"
-    static var PROXY_DOMAIN : String?
+    static var PROXY_URL : String?
     
     /// Get the current time in a formatted string.
     ///
@@ -40,9 +40,9 @@ struct Utils {
             data["sdk_version"] = String(intValue)
         }
         data["app_id"] = defaults.string(forKey: "app_id")
-        data["proxy_domain"] = defaults.string(forKey: "proxy_domain")
-        if let proxyDomain = data["proxy_domain"]{
-            PROXY_DOMAIN = proxyDomain
+        data["proxy_url"] = defaults.string(forKey: "proxy_url")
+        if let proxyURL = data["proxy_url"]{
+            PROXY_URL = proxyURL
         }
        
         
@@ -95,12 +95,12 @@ struct Utils {
         sharedDefaults?.synchronize()
     }
     
-    static func setDomainURL(urlrequest:inout URLRequest){
+    static func setProxyURL(urlrequest:inout URLRequest){
         if let urlStr = urlrequest.url?.absoluteString,
-           let proxy = PROXY_DOMAIN,proxy != "",
+           let proxy = PROXY_URL,proxy != "",
            !urlStr.contains(proxy){
             if let encodedUrl = urlStr.addingPercentEncoding(withAllowedCharacters: .urlUserAllowed),
-               let newURL = URL(string: "https://\(proxy)?url=\(encodedUrl)") {
+               let newURL = URL(string: "\(proxy)?url=\(encodedUrl)") {
                 urlrequest.url = newURL
             }
         }
