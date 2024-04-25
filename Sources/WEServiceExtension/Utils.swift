@@ -11,7 +11,7 @@ import Foundation
 struct Utils {
     
     /// The version of the service extension.
-    static let WEX_SERVICE_EXTENSION_VERSION = "1.0.0"
+    static let WEX_SERVICE_EXTENSION_VERSION = "1.1.0"
     static var PROXY_URL : String?
     
     /// Get the current time in a formatted string.
