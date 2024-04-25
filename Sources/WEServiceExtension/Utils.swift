@@ -11,7 +11,8 @@ import Foundation
 struct Utils {
     
     /// The version of the service extension.
-    static let WEX_SERVICE_EXTENSION_VERSION = "1.0.0"
+    static let WEX_SERVICE_EXTENSION_VERSION = "1.1.0"
+    static var PROXY_URL : String?
     
     /// Get the current time in a formatted string.
     ///
@@ -39,6 +40,11 @@ struct Utils {
             data["sdk_version"] = String(intValue)
         }
         data["app_id"] = defaults.string(forKey: "app_id")
+        data["proxy_url"] = defaults.string(forKey: "proxy_url")
+        if let proxyURL = data["proxy_url"]{
+            PROXY_URL = proxyURL
+        }
+       
         
         print("Environment: \(defaults.string(forKey: "environment") ?? "")")
         data["environment"] = defaults.string(forKey: "environment") ?? ""
@@ -87,6 +93,17 @@ struct Utils {
         // for WebEngageBannerPush it will be saved under : WEG_Service_Extension_Version
         sharedDefaults?.setValue(WEX_SERVICE_EXTENSION_VERSION, forKey: "WEServiceExtension_version")
         sharedDefaults?.synchronize()
+    }
+    
+    static func setProxyURL(urlrequest:inout URLRequest){
+        if let urlStr = urlrequest.url?.absoluteString,
+           let proxy = PROXY_URL,proxy != "",
+           !urlStr.contains(proxy){
+            if let encodedUrl = urlStr.addingPercentEncoding(withAllowedCharacters: .urlUserAllowed),
+               let newURL = URL(string: "\(proxy)?url=\(encodedUrl)") {
+                urlrequest.url = newURL
+            }
+        }
     }
 }
 

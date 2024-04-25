@@ -54,22 +54,22 @@
   - #### **_Screenshots_**
 
     <p align="center">
-      <img src="./assets/2.png" alt="Screenshot 1" width="1000">
+      <img src="https://github.com/WebEngage/WEServiceExtension/blob/docs/readme/assets/2.png" alt="Screenshot 1" width="1000">
     </p>
     <h5 align="center">Screenshot 1</h5>
 
     <p align="center">
-      <img src="./assets/3.png" alt="Screenshot 2" width="1000">
+      <img src="https://github.com/WebEngage/WEServiceExtension/blob/docs/readme/assets/3.png" alt="Screenshot 2" width="1000">
     </p>
     <h5 align="center">Screenshot 2</h5>
 
     <p align="center">
-      <img src="./assets/4.png" alt="Screenshot 3" width="1000">
+      <img src="https://github.com/WebEngage/WEServiceExtension/blob/docs/readme/assets/4.png" alt="Screenshot 3" width="1000">
     </p>
     <h5 align="center">Screenshot 3</h5>
 
     <p align="center">
-      <img src="./assets/5.png" alt="Screenshot 4" width="1000">
+      <img src="https://github.com/WebEngage/WEServiceExtension/blob/docs/readme/assets/5.png" alt="Screenshot 4" width="1000">
     </p>
     <h5 align="center">Screenshot 4</h5>
 
@@ -100,31 +100,31 @@
 
     <br>
     <p align="center">
-    <img src="./assets/p1.png" alt="Screenshot 1 (SPM)" width="1000">
+    <img src="https://github.com/WebEngage/WEServiceExtension/blob/docs/readme/assets/p1.png" alt="Screenshot 1 (SPM)" width="1000">
     </p>
     <h5 align="center">Screenshot 1 (SPM)</h5>
 
     <p align="center">
-    <img src="./assets/p2.png" alt="Screenshot 2 (SPM)" width="1000">
+    <img src="https://github.com/WebEngage/WEServiceExtension/blob/docs/readme/assets/p2.png" alt="Screenshot 2 (SPM)" width="1000">
     </p>
     <h5 align="center">Screenshot 2 (SPM)</h5>
 
     <p align="center">
-    <img src="./assets/p3.png" alt="Screenshot 3 (SPM)" width="1000">
+    <img src="https://github.com/WebEngage/WEServiceExtension/blob/docs/readme/assets/p3.png" alt="Screenshot 3 (SPM)" width="1000">
     </p>
     <h5 align="center">Screenshot 3 (SPM)</h5>
 
   - Under `Add to Target` select `NotificationService` (Your Service Extension Target).
   <br><br>
      <p align="center">
-      <img src="./assets/p4.png" alt="Screenshot 4 (SPM)" width="1000">
+      <img src="https://github.com/WebEngage/WEServiceExtension/blob/docs/readme/assets/p4.png" alt="Screenshot 4 (SPM)" width="1000">
       </p>
       <h5 align="center">Screenshot 4 (SPM)</h5>
 
   - Click `Add Package`.
   <br><br>
     <p align="center">
-    <img src="./assets/p5.png" alt="Screenshot 5 (SPM)" width="1000">
+    <img src="https://github.com/WebEngage/WEServiceExtension/blob/docs/readme/assets/p5.png" alt="Screenshot 5 (SPM)" width="1000">
     </p>
     <h5 align="center">Screenshot 5 (SPM)</h5>
 
@@ -240,7 +240,7 @@
   - Set `Allow Arbitrary` Loads to `YES` under `App Transport Security Settings` - Not required if you are sure that image URLs provided on `WebEngage` dashboard will always use `https`.
   <br><br>
     <p align="center">
-    <img src="./assets/appGroup/4.png" alt="Screenshot 1" width="1000">
+    <img src="https://github.com/WebEngage/WEServiceExtension/blob/docs/readme/assets/appGroup/4.png" alt="Screenshot 1" width="1000">
     </p>
     <h5 align="center">Screenshot 1</h5>
 
@@ -255,17 +255,17 @@
   - #### **_Screenshots_**
     <br><br>
       <p align="center">
-      <img src="./assets/appGroup/1.png" alt="Screenshot 1" width="1000">
+      <img src="https://github.com/WebEngage/WEServiceExtension/blob/docs/readme/assets/appGroup/1.png" alt="Screenshot 1" width="1000">
       </p>
       <h5 align="center">Screenshot 1</h5>
       <br><br>
       <p align="center">
-      <img src="./assets/appGroup/2.png" alt="Screenshot 1" width="1000">
+      <img src="https://github.com/WebEngage/WEServiceExtension/blob/docs/readme/assets/appGroup/2.png" alt="Screenshot 1" width="1000">
       </p>
       <h5 align="center">Screenshot 2</h5>
       <br><br>
       <p align="center">
-      <img src="./assets/appGroup/3.png" alt="Screenshot 1" width="1000">
+      <img src="https://github.com/WebEngage/WEServiceExtension/blob/docs/readme/assets/appGroup/3.png" alt="Screenshot 1" width="1000">
       </p>
       <h5 align="center">Screenshot 3</h5>
 
