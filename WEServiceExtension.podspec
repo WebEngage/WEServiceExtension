@@ -19,5 +19,5 @@ Pod::Spec.new do |s|
     s.source_files = 'Sources/WEServiceExtension/**/*'
     s.weak_frameworks      = 'UserNotifications'
     s.dependency 'WebEngage','>= 6.4.0'
-    
+    s.resource_bundles = { 'WEServiceExtension' => 'Sources/WEServiceExtension/Resources/*.{xcprivacy}' }
 end
