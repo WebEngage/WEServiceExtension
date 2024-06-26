@@ -73,11 +73,18 @@ struct Network {
     static func trackEvent(completion: (() -> Void)?, bestAttemptContent: UNMutableNotificationContent?, contentHandler: ((UNNotificationContent) -> Void)?) {
         if var requestForEventReceived = getRequestForTracker(eventName: "push_notification_received", bestAttemptContent: bestAttemptContent) {
             Utils.setProxyURL(urlrequest: &requestForEventReceived)
+            Utils.getInterceptedRequest(request: requestForEventReceived){ _modifiedRequest in
+                requestForEventReceived = _modifiedRequest
+            }
             URLSession.shared.dataTask(with: requestForEventReceived) { data, response, error in
-                if let error = error {
+                var networkResponse = WENetworkResponse.create(data: data,response: response,error: error)
+                Utils.getInterceptedResponse(taskResponse: networkResponse){ _modifiedResponse in
+                    networkResponse = _modifiedResponse
+                }
+                if let error = networkResponse.error {
                     print("Could not log push_notification_received event with error: \(error)")
                 } else {
-                    print("Push Tracker URLResponse: \(response.debugDescription )")
+                    print("Push Tracker URLResponse: \(networkResponse.response.debugDescription )")
                 }
                 
                 completion?()
@@ -86,11 +93,18 @@ struct Network {
         
         if var requestForEventView = getRequestForTracker(eventName: "push_notification_view", bestAttemptContent: bestAttemptContent) {
             Utils.setProxyURL(urlrequest: &requestForEventView)
+            Utils.getInterceptedRequest(request: requestForEventView){ _modifiedRequest in
+                requestForEventView = _modifiedRequest
+            }
             URLSession.shared.dataTask(with: requestForEventView) { data, response, error in
-                if let error = error {
+                var networkResponse = WENetworkResponse.create(data: data,response: response,error: error)
+                Utils.getInterceptedResponse(taskResponse: networkResponse){ _modifiedResponse in
+                    networkResponse = _modifiedResponse
+                }
+                if let error = networkResponse.error {
                     print("Could not log push_notification_view event with error: \(error)")
                 } else {
-                    print("Push Tracker URLResponse: \(response.debugDescription )")
+                    print("Push Tracker URLResponse: \(networkResponse.response.debugDescription )")
                 }
                 
                 completion?()

@@ -19,6 +19,9 @@ open class WEXPushNotificationService: UNNotificationServiceExtension {
             self.contentHandler = contentHandler
             self.bestAttemptContent = request.content.mutableCopy() as? UNMutableNotificationContent
             Utils.setExtensionDefaults()
+            if self.handleNetworkInterceptor(){
+                Utils.weNetworkInterceptor = self
+            }
             
             print("Push Notification content: \(request.content.userInfo)")
             
@@ -88,4 +91,16 @@ open class WEXPushNotificationService: UNNotificationServiceExtension {
             contentHandler(bestAttemptContent)
         }
     }
+    @objc open func handleNetworkInterceptor() -> Bool{
+        return false
+    }
+    
+    @objc open func onRequest(_ request: URLRequest, completionHandler: @escaping (URLRequest) -> Void) {
+        completionHandler(request)
+    }
+    
+    @objc open func onResponse(_ response: WENetworkResponse, completionHandler: @escaping (WENetworkResponse) -> Void) {
+        completionHandler(response)
+    }
+    
 }
