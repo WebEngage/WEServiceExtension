@@ -9,10 +9,20 @@ import UserNotifications
 
 @objc
 open class WEXPushNotificationService: UNNotificationServiceExtension {
-    
+
+    let notificationDelegate: UNNotificationServiceExtension?
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?
     var customCategories: [String]?
+    
+    @objc public init(notificationDelegate: UNNotificationServiceExtension? = nil) {
+        self.notificationDelegate = notificationDelegate
+    }
+    
+    @objc public override init() {
+        self.notificationDelegate = nil
+        super.init()
+    }
     
     open override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         if let source = request.content.userInfo["source"] as? String, source == "webengage" {
@@ -21,6 +31,8 @@ open class WEXPushNotificationService: UNNotificationServiceExtension {
             Utils.setExtensionDefaults()
             if self.handleNetworkInterceptor(){
                 Utils.weNetworkInterceptor = self
+            } else if (notificationDelegate != nil){
+                Utils.weNetworkInterceptor = notificationDelegate
             }
             
             print("Push Notification content: \(request.content.userInfo)")

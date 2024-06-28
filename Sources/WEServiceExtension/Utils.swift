@@ -13,8 +13,7 @@ struct Utils {
     /// The version of the service extension.
     static let WEX_SERVICE_EXTENSION_VERSION = "1.1.0"
     static var PROXY_URL : String?
-    static var weNetworkInterceptor: WEXPushNotificationService?
-    
+    static var weNetworkInterceptor: AnyObject?
     /// Get the current time in a formatted string.
     ///
     /// - Returns: A formatted date and time string.
