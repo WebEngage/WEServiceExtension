@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
     s.name             = 'WEServiceExtension'
-    s.version          = '1.1.0'
+    s.version          = '1.1.1'
     s.summary          = 'Extension Target SDK for adding WebEngage Rich Push Notifications support'
     
     s.description      = <<-DESC
@@ -18,6 +18,6 @@ Pod::Spec.new do |s|
     s.swift_version = '5.0'
     s.source_files = 'Sources/WEServiceExtension/**/*'
     s.weak_frameworks      = 'UserNotifications'
-    s.dependency 'WebEngage','>= 6.4.0'
-    
+    s.dependency 'WebEngage/Core','>= 6.9.0'
+    s.resource_bundles = { 'WEServiceExtension' => 'Sources/WEServiceExtension/Resources/*.{xcprivacy}' }
 end
