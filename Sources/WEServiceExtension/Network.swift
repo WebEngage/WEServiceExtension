@@ -76,24 +76,20 @@ struct Network {
             Utils.getInterceptedRequest(request: requestForEventReceived){ _modifiedRequest in
                 requestForEventReceived = _modifiedRequest
             }
-            if (requestForEventReceived.url == nil){
-                print("Push Tracker URLResponse: Invalid request URL")
+            URLSession.shared.dataTask(with: requestForEventReceived) { data, response, error in
+                var networkResponse = WENetworkResponse.create(data: data,response: response,error: error)
+                Utils.getInterceptedResponse(taskResponse: networkResponse){ _modifiedResponse in
+                    networkResponse = _modifiedResponse
+                }
+                if let error = networkResponse.error {
+                    print("Could not log push_notification_received event with error: \(error)")
+                } else {
+                    //Network Interceptor's nil response is not handled here as the response is never used or pass anywhere
+                    print("Push Tracker URLResponse: \(networkResponse.response.debugDescription )")
+                }
+                
                 completion?()
-            } else {
-                URLSession.shared.dataTask(with: requestForEventReceived) { data, response, error in
-                    var networkResponse = WENetworkResponse.create(data: data,response: response,error: error)
-                    Utils.getInterceptedResponse(taskResponse: networkResponse){ _modifiedResponse in
-                        networkResponse = _modifiedResponse
-                    }
-                    if let error = networkResponse.error {
-                        print("Could not log push_notification_received event with error: \(error)")
-                    } else {
-                        print("Push Tracker URLResponse: \(networkResponse.response.debugDescription )")
-                    }
-                    
-                    completion?()
-                }.resume()
-            }
+            }.resume()
         }
         
         if var requestForEventView = getRequestForTracker(eventName: "push_notification_view", bestAttemptContent: bestAttemptContent) {
@@ -101,24 +97,20 @@ struct Network {
             Utils.getInterceptedRequest(request: requestForEventView){ _modifiedRequest in
                 requestForEventView = _modifiedRequest
             }
-            if (requestForEventView.url == nil){
-                print("Push Tracker URLResponse: Invalid request URL")
+            URLSession.shared.dataTask(with: requestForEventView) { data, response, error in
+                var networkResponse = WENetworkResponse.create(data: data,response: response,error: error)
+                Utils.getInterceptedResponse(taskResponse: networkResponse){ _modifiedResponse in
+                    networkResponse = _modifiedResponse
+                }
+                if let error = networkResponse.error {
+                    print("Could not log push_notification_view event with error: \(error)")
+                } else {
+                    //Network Interceptor's nil response is not handled here as the response is never used or pass anywhere
+                    print("Push Tracker URLResponse: \(networkResponse.response.debugDescription )")
+                }
+                
                 completion?()
-            } else {
-                URLSession.shared.dataTask(with: requestForEventView) { data, response, error in
-                    var networkResponse = WENetworkResponse.create(data: data,response: response,error: error)
-                    Utils.getInterceptedResponse(taskResponse: networkResponse){ _modifiedResponse in
-                        networkResponse = _modifiedResponse
-                    }
-                    if let error = networkResponse.error {
-                        print("Could not log push_notification_view event with error: \(error)")
-                    } else {
-                        print("Push Tracker URLResponse: \(networkResponse.response.debugDescription )")
-                    }
-                    
-                    completion?()
-                }.resume()
-            }
+            }.resume()
         }
     }
     
