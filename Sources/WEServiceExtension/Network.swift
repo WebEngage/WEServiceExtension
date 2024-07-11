@@ -71,48 +71,30 @@ struct Network {
     ///   - bestAttemptContent: The best attempt notification content.
     ///   - contentHandler: A closure for handling the notification content.
     static func trackEvent(completion: (() -> Void)?, bestAttemptContent: UNMutableNotificationContent?, contentHandler: ((UNNotificationContent) -> Void)?) {
-        if var requestForEventReceived = getRequestForTracker(eventName: "push_notification_received", bestAttemptContent: bestAttemptContent) {
-            Utils.setProxyURL(urlrequest: &requestForEventReceived)
-            Utils.getInterceptedRequest(request: requestForEventReceived){ _modifiedRequest in
-                requestForEventReceived = _modifiedRequest
+        let events = ["push_notification_received", "push_notification_view"]
+
+        for eventName in events {
+            if var requestForEvent = getRequestForTracker(eventName: eventName, bestAttemptContent: bestAttemptContent) {
+                Utils.setProxyURL(urlrequest: &requestForEvent)
+                Utils.getInterceptedRequest(request: requestForEvent) { _modifiedRequest in
+                    requestForEvent = _modifiedRequest
+                    URLSession.shared.dataTask(with: requestForEvent) { data, response, error in
+                        var networkResponse = WENetworkResponse.create(data: data, response: response, error: error)
+                        Utils.getInterceptedResponse(taskResponse: networkResponse) { _modifiedResponse in
+                            networkResponse = _modifiedResponse
+                            if let error = networkResponse.error {
+                                print("Could not log \(eventName) event with error: \(error)")
+                            } else {
+                                print("Push Tracker URLResponse: \(networkResponse.response.debugDescription)")
+                            }
+                        }
+                        completion?()
+                    }.resume()
+                }
             }
-            URLSession.shared.dataTask(with: requestForEventReceived) { data, response, error in
-                var networkResponse = WENetworkResponse.create(data: data,response: response,error: error)
-                Utils.getInterceptedResponse(taskResponse: networkResponse){ _modifiedResponse in
-                    networkResponse = _modifiedResponse
-                }
-                if let error = networkResponse.error {
-                    print("Could not log push_notification_received event with error: \(error)")
-                } else {
-                    //Network Interceptor's nil response is not handled here as the response is never used or pass anywhere
-                    print("Push Tracker URLResponse: \(networkResponse.response.debugDescription )")
-                }
-                
-                completion?()
-            }.resume()
-        }
-        
-        if var requestForEventView = getRequestForTracker(eventName: "push_notification_view", bestAttemptContent: bestAttemptContent) {
-            Utils.setProxyURL(urlrequest: &requestForEventView)
-            Utils.getInterceptedRequest(request: requestForEventView){ _modifiedRequest in
-                requestForEventView = _modifiedRequest
-            }
-            URLSession.shared.dataTask(with: requestForEventView) { data, response, error in
-                var networkResponse = WENetworkResponse.create(data: data,response: response,error: error)
-                Utils.getInterceptedResponse(taskResponse: networkResponse){ _modifiedResponse in
-                    networkResponse = _modifiedResponse
-                }
-                if let error = networkResponse.error {
-                    print("Could not log push_notification_view event with error: \(error)")
-                } else {
-                    //Network Interceptor's nil response is not handled here as the response is never used or pass anywhere
-                    print("Push Tracker URLResponse: \(networkResponse.response.debugDescription )")
-                }
-                
-                completion?()
-            }.resume()
         }
     }
+
     
     /// Get a URLRequest for tracking an event.
     ///
