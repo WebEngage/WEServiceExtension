@@ -71,30 +71,34 @@ struct Network {
     ///   - bestAttemptContent: The best attempt notification content.
     ///   - contentHandler: A closure for handling the notification content.
     static func trackEvent(completion: (() -> Void)?, bestAttemptContent: UNMutableNotificationContent?, contentHandler: ((UNNotificationContent) -> Void)?) {
-        if var requestForEventReceived = getRequestForTracker(eventName: "push_notification_received", bestAttemptContent: bestAttemptContent) {
-            Utils.setProxyURL(urlrequest: &requestForEventReceived)
-            URLSession.shared.dataTask(with: requestForEventReceived) { data, response, error in
-                if let error = error {
-                    print("Could not log push_notification_received event with error: \(error)")
-                } else {
-                    print("Push Tracker URLResponse: \(response.debugDescription )")
-                }
-                
-                completion?()
-            }.resume()
-        }
-        
-        if var requestForEventView = getRequestForTracker(eventName: "push_notification_view", bestAttemptContent: bestAttemptContent) {
-            Utils.setProxyURL(urlrequest: &requestForEventView)
-            URLSession.shared.dataTask(with: requestForEventView) { data, response, error in
-                if let error = error {
-                    print("Could not log push_notification_view event with error: \(error)")
-                } else {
-                    print("Push Tracker URLResponse: \(response.debugDescription )")
-                }
-                
-                completion?()
-            }.resume()
+        if Utils.isAppGroupConfigured(){
+            if var requestForEventReceived = getRequestForTracker(eventName: "push_notification_received", bestAttemptContent: bestAttemptContent) {
+                Utils.setProxyURL(urlrequest: &requestForEventReceived)
+                URLSession.shared.dataTask(with: requestForEventReceived) { data, response, error in
+                    if let error = error {
+                        print("Could not log push_notification_received event with error: \(error)")
+                    } else {
+                        print("Push Tracker URLResponse: \(response.debugDescription )")
+                    }
+                    
+                    completion?()
+                }.resume()
+            }
+            
+            if var requestForEventView = getRequestForTracker(eventName: "push_notification_view", bestAttemptContent: bestAttemptContent) {
+                Utils.setProxyURL(urlrequest: &requestForEventView)
+                URLSession.shared.dataTask(with: requestForEventView) { data, response, error in
+                    if let error = error {
+                        print("Could not log push_notification_view event with error: \(error)")
+                    } else {
+                        print("Push Tracker URLResponse: \(response.debugDescription )")
+                    }
+                    
+                    completion?()
+                }.resume()
+            }
+        } else {
+            completion?()
         }
     }
     
