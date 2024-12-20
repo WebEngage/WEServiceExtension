@@ -44,7 +44,7 @@ struct Utils {
         if let proxyURL = data["proxy_url"]{
             PROXY_URL = proxyURL
         }
-       
+        data["WEGShouldTrackIPLocation"] = defaults.string(forKey: "WEGShouldTrackIPLocation")
         
         print("Environment: \(defaults.string(forKey: "environment") ?? "")")
         data["environment"] = defaults.string(forKey: "environment") ?? ""
@@ -104,6 +104,18 @@ struct Utils {
                 urlrequest.url = newURL
             }
         }
+    }
+    
+    static func shouldTrackIPLocation(request: inout URLRequest) {
+        guard let userDefaultsData = Utils.getDataFromSharedUserDefaults() else {
+            return
+        }
+        let shouldTrackIP = userDefaultsData["WEGShouldTrackIPLocation"]
+
+            // Add x-geo-ignore flag to the request headers based on shouldTrackIP
+            if shouldTrackIP == "false" {
+                request.setValue("1", forHTTPHeaderField: "x-geo-ignore")
+            }
     }
 }
 
