@@ -13,7 +13,7 @@ struct Utils {
     /// The version of the service extension.
     static let WEX_SERVICE_EXTENSION_VERSION = "1.1.2"
     static var PROXY_URL : String?
-    
+    static var weNetworkInterceptor: AnyObject?
     /// Get the current time in a formatted string.
     ///
     /// - Returns: A formatted date and time string.
@@ -102,6 +102,22 @@ struct Utils {
             if let encodedUrl = urlStr.addingPercentEncoding(withAllowedCharacters: .urlUserAllowed),
                let newURL = URL(string: "\(proxy)?url=\(encodedUrl)") {
                 urlrequest.url = newURL
+            }
+        }
+    }
+    
+    static func getInterceptedRequest(request: URLRequest, completionHandler: @escaping (URLRequest)->Void){
+        if let interceptor = Utils.weNetworkInterceptor{
+            interceptor.onRequest(request){ _modifiedRequest in
+                 completionHandler(_modifiedRequest)
+            }
+        }
+    }
+    
+    static func getInterceptedResponse(taskResponse: WENetworkResponse, completionHandler: @escaping (WENetworkResponse)->Void) {
+        if let interceptor = Utils.weNetworkInterceptor{
+            interceptor.onResponse(taskResponse){ _modifiedResponse in
+                completionHandler(_modifiedResponse)
             }
         }
     }
