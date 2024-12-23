@@ -55,29 +55,18 @@ struct Utils {
     ///
     /// - Returns: The shared user defaults instance or nil if it couldn't be initialized.
     static func getSharedUserDefaults() -> UserDefaults? {
-        var appGroup = Bundle.main.object(forInfoDictionaryKey: "WEX_APP_GROUP") as? String
-        
-        if appGroup == nil {
-            var bundle = Bundle.main
-            
-            if bundle.bundleURL.pathExtension == "appex" {
-                bundle = Bundle(url: bundle.bundleURL.deletingLastPathComponent().deletingLastPathComponent())!
+        guard let appGroup = getAppGroup() else {
+                ALog("WebEngage App Group not configured in Service Extension")
+                return nil
             }
             
-            let bundleIdentifier = bundle.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String
-            
-            appGroup = "group.\(bundleIdentifier ?? "").WEGNotificationGroup"
-        }
-        
-        if let appGroup = appGroup {
-            if let defaults = UserDefaults(suiteName: appGroup) {
-                return defaults
+            if let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroup) {
+                print("WebEngage App Group configured in Service Extension")
             } else {
-                print("Shared User Defaults could not be initialized. Ensure Shared App Groups have been enabled on Main App & Notification Service Extension Targets.")
+                ALog("WebEngage App Group not configured in Service Extension")
             }
-        }
-        
-        return nil
+            
+            return UserDefaults(suiteName: appGroup)
     }
     
     /// Set default values for the service extension.
@@ -131,5 +120,39 @@ struct Utils {
                 request.setValue("1", forHTTPHeaderField: "x-geo-ignore")
             }
     }
+    static func isAppGroupConfigured() -> Bool {
+        guard let appGroup = getAppGroup() else {
+            return false
+        }
+        
+        if let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroup) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    static func getAppGroup() -> String? {
+        if let appGroup = Bundle.main.object(forInfoDictionaryKey: "WEX_APP_GROUP") as? String {
+               return appGroup
+           }
+           
+           // Continue with the default logic if appGroup is not found
+           var bundle = Bundle.main
+           if bundle.bundleURL.pathExtension == "appex" {
+               bundle = Bundle(url: bundle.bundleURL.deletingLastPathComponent().deletingLastPathComponent()) ?? bundle
+           }
+           
+           if let bundleIdentifier = bundle.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String {
+               return "group.\(bundleIdentifier).WEGNotificationGroup"
+           }
+           
+           return nil
+    }
+    
+    static func ALog(_ message: String, file: String = #file, function: String = #function, line: Int = #line) {
+        NSLog("%@ [Line %d] ERROR: %@", (function as NSString).lastPathComponent, line, message)
+    }
+
 }
 

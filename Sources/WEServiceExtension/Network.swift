@@ -71,6 +71,7 @@ struct Network {
     ///   - bestAttemptContent: The best attempt notification content.
     ///   - contentHandler: A closure for handling the notification content.
     static func trackEvent(completion: (() -> Void)?, bestAttemptContent: UNMutableNotificationContent?, contentHandler: ((UNNotificationContent) -> Void)?) {
+    if Utils.isAppGroupConfigured(){
         let events = ["push_notification_received", "push_notification_view"]
 
         for eventName in events {
@@ -93,6 +94,9 @@ struct Network {
                     }.resume()
                 }
             }
+        }
+    } else {
+            completion?()
         }
     }
 
