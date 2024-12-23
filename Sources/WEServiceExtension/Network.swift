@@ -76,6 +76,7 @@ struct Network {
         for eventName in events {
             if var requestForEvent = getRequestForTracker(eventName: eventName, bestAttemptContent: bestAttemptContent) {
                 Utils.setProxyURL(urlrequest: &requestForEvent)
+                Utils.shouldTrackIPLocation(request: &requestForEvent)
                 Utils.getInterceptedRequest(request: requestForEvent) { _modifiedRequest in
                     requestForEvent = _modifiedRequest
                     URLSession.shared.dataTask(with: requestForEvent) { data, response, error in
