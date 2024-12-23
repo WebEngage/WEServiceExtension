@@ -56,17 +56,17 @@ struct Utils {
     /// - Returns: The shared user defaults instance or nil if it couldn't be initialized.
     static func getSharedUserDefaults() -> UserDefaults? {
         guard let appGroup = getAppGroup() else {
-                ALog("WebEngage App Group not configured in Service Extension")
-                return nil
-            }
-            
-            if let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroup) {
-                print("WebEngage App Group configured in Service Extension")
-            } else {
-                ALog("WebEngage App Group not configured in Service Extension")
-            }
-            
-            return UserDefaults(suiteName: appGroup)
+            ALog("WebEngage App Group not configured in Service Extension")
+            return nil
+        }
+        
+        if let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroup) {
+            print("WebEngage App Group configured in Service Extension")
+        } else {
+            ALog("WebEngage App Group not configured in Service Extension")
+        }
+        
+        return UserDefaults(suiteName: appGroup)
     }
     
     /// Set default values for the service extension.
@@ -98,7 +98,7 @@ struct Utils {
     static func getInterceptedRequest(request: URLRequest, completionHandler: @escaping (URLRequest)->Void){
         if let interceptor = Utils.weNetworkInterceptor{
             interceptor.onRequest(request){ _modifiedRequest in
-                 completionHandler(_modifiedRequest)
+                completionHandler(_modifiedRequest)
             }
         }
     }
@@ -109,17 +109,20 @@ struct Utils {
                 completionHandler(_modifiedResponse)
             }
         }
+    }
+    
     static func shouldTrackIPLocation(request: inout URLRequest) {
         guard let userDefaultsData = Utils.getDataFromSharedUserDefaults() else {
             return
         }
         let shouldTrackIP = userDefaultsData["WEGShouldTrackIPLocation"]
-
-            // Add x-geo-ignore flag to the request headers based on shouldTrackIP
-            if shouldTrackIP == "false" {
-                request.setValue("1", forHTTPHeaderField: "x-geo-ignore")
-            }
+        
+        // Add x-geo-ignore flag to the request headers based on shouldTrackIP
+        if shouldTrackIP == "false" {
+            request.setValue("1", forHTTPHeaderField: "x-geo-ignore")
+        }
     }
+    
     static func isAppGroupConfigured() -> Bool {
         guard let appGroup = getAppGroup() else {
             return false
@@ -134,25 +137,24 @@ struct Utils {
     
     static func getAppGroup() -> String? {
         if let appGroup = Bundle.main.object(forInfoDictionaryKey: "WEX_APP_GROUP") as? String {
-               return appGroup
-           }
-           
-           // Continue with the default logic if appGroup is not found
-           var bundle = Bundle.main
-           if bundle.bundleURL.pathExtension == "appex" {
-               bundle = Bundle(url: bundle.bundleURL.deletingLastPathComponent().deletingLastPathComponent()) ?? bundle
-           }
-           
-           if let bundleIdentifier = bundle.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String {
-               return "group.\(bundleIdentifier).WEGNotificationGroup"
-           }
-           
-           return nil
+            return appGroup
+        }
+        
+        // Continue with the default logic if appGroup is not found
+        var bundle = Bundle.main
+        if bundle.bundleURL.pathExtension == "appex" {
+            bundle = Bundle(url: bundle.bundleURL.deletingLastPathComponent().deletingLastPathComponent()) ?? bundle
+        }
+        
+        if let bundleIdentifier = bundle.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String {
+            return "group.\(bundleIdentifier).WEGNotificationGroup"
+        }
+        
+        return nil
     }
     
     static func ALog(_ message: String, file: String = #file, function: String = #function, line: Int = #line) {
         NSLog("%@ [Line %d] ERROR: %@", (function as NSString).lastPathComponent, line, message)
     }
-
+    
 }
-
