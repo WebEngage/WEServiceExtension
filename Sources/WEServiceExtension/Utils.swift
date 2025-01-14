@@ -11,9 +11,9 @@ import Foundation
 struct Utils {
     
     /// The version of the service extension.
-    static let WEX_SERVICE_EXTENSION_VERSION = "1.1.2"
+    static let WEX_SERVICE_EXTENSION_VERSION = "1.1.3"
     static var PROXY_URL : String?
-    
+    static var weNetworkInterceptor: AnyObject?
     /// Get the current time in a formatted string.
     ///
     /// - Returns: A formatted date and time string.
@@ -44,7 +44,7 @@ struct Utils {
         if let proxyURL = data["proxy_url"]{
             PROXY_URL = proxyURL
         }
-       
+        data["WEGShouldTrackIPLocation"] = defaults.string(forKey: "WEGShouldTrackIPLocation")
         
         print("Environment: \(defaults.string(forKey: "environment") ?? "")")
         data["environment"] = defaults.string(forKey: "environment") ?? ""
@@ -55,29 +55,18 @@ struct Utils {
     ///
     /// - Returns: The shared user defaults instance or nil if it couldn't be initialized.
     static func getSharedUserDefaults() -> UserDefaults? {
-        var appGroup = Bundle.main.object(forInfoDictionaryKey: "WEX_APP_GROUP") as? String
-        
-        if appGroup == nil {
-            var bundle = Bundle.main
-            
-            if bundle.bundleURL.pathExtension == "appex" {
-                bundle = Bundle(url: bundle.bundleURL.deletingLastPathComponent().deletingLastPathComponent())!
-            }
-            
-            let bundleIdentifier = bundle.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String
-            
-            appGroup = "group.\(bundleIdentifier ?? "").WEGNotificationGroup"
+        guard let appGroup = getAppGroup() else {
+            ALog("WebEngage App Group not configured in Service Extension")
+            return nil
         }
         
-        if let appGroup = appGroup {
-            if let defaults = UserDefaults(suiteName: appGroup) {
-                return defaults
-            } else {
-                print("Shared User Defaults could not be initialized. Ensure Shared App Groups have been enabled on Main App & Notification Service Extension Targets.")
-            }
+        if let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroup) {
+            print("WebEngage App Group configured in Service Extension")
+        } else {
+            ALog("WebEngage App Group not configured in Service Extension")
         }
         
-        return nil
+        return UserDefaults(suiteName: appGroup)
     }
     
     /// Set default values for the service extension.
@@ -105,5 +94,67 @@ struct Utils {
             }
         }
     }
+    
+    static func getInterceptedRequest(request: URLRequest, completionHandler: @escaping (URLRequest)->Void){
+        if let interceptor = Utils.weNetworkInterceptor{
+            interceptor.onRequest(request){ _modifiedRequest in
+                completionHandler(_modifiedRequest)
+            }
+        }
+    }
+    
+    static func getInterceptedResponse(taskResponse: WENetworkResponse, completionHandler: @escaping (WENetworkResponse)->Void) {
+        if let interceptor = Utils.weNetworkInterceptor{
+            interceptor.onResponse(taskResponse){ _modifiedResponse in
+                completionHandler(_modifiedResponse)
+            }
+        }
+    }
+    
+    static func shouldTrackIPLocation(request: inout URLRequest) {
+        guard let userDefaultsData = Utils.getDataFromSharedUserDefaults() else {
+            return
+        }
+        let shouldTrackIP = userDefaultsData["WEGShouldTrackIPLocation"]
+        
+        // Add x-geo-ignore flag to the request headers based on shouldTrackIP
+        if shouldTrackIP == "false" {
+            request.setValue("1", forHTTPHeaderField: "x-geo-ignore")
+        }
+    }
+    
+    static func isAppGroupConfigured() -> Bool {
+        guard let appGroup = getAppGroup() else {
+            return false
+        }
+        
+        if let containerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroup) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    static func getAppGroup() -> String? {
+        if let appGroup = Bundle.main.object(forInfoDictionaryKey: "WEX_APP_GROUP") as? String {
+            return appGroup
+        }
+        
+        // Continue with the default logic if appGroup is not found
+        var bundle = Bundle.main
+        if bundle.bundleURL.pathExtension == "appex" {
+            bundle = Bundle(url: bundle.bundleURL.deletingLastPathComponent().deletingLastPathComponent()) ?? bundle
+        }
+        
+        if let bundleIdentifier = bundle.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String {
+            return "group.\(bundleIdentifier).WEGNotificationGroup"
+        }
+        
+        return nil
+    }
+    
+    static func ALog(_ message: String, file: String = #file, function: String = #function, line: Int = #line) {
+        NSLog("%@ [Line %d] ERROR: %@", (function as NSString).lastPathComponent, line, message)
+    }
+    
 }
-
