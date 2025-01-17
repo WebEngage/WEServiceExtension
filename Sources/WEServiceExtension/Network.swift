@@ -129,6 +129,11 @@ struct Network {
         if let userDefaultsData = Utils.getDataFromSharedUserDefaults() {
             let environment = userDefaultsData["environment"]
             
+            if let customBaseUrl = userDefaultsData["custombaseUrl"],
+                    !customBaseUrl.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    return "https://c.@/tracker".replacingOccurrences(of: "@", with: customBaseUrl)
+            }
+            
             print("Setting Environment to: \(environment ?? "")")
             
             if environment?.uppercased() == "IN" {
