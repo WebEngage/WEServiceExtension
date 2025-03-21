@@ -77,7 +77,7 @@ struct Network {
         for eventName in events {
             if var requestForEvent = getRequestForTracker(eventName: eventName, bestAttemptContent: bestAttemptContent) {
                 Utils.setProxyURL(urlrequest: &requestForEvent)
-                Utils.shouldTrackIPLocation(request: &requestForEvent)
+                Utils.trackIPLocation(request: &requestForEvent)
                 Utils.getInterceptedRequest(request: requestForEvent) { _modifiedRequest in
                     requestForEvent = _modifiedRequest
                     URLSession.shared.dataTask(with: requestForEvent) { data, response, error in
@@ -126,20 +126,21 @@ struct Network {
     static func getBaseURL() -> String {
         var baseURL = "https://c.webengage.com/tracker"
         
-        if let userDefaultsData = Utils.getDataFromSharedUserDefaults() {
-            let environment = userDefaultsData["environment"]
+        if let userDefaultsData = Utils.getDataFromSharedUserDefaults(),
+           let environment = userDefaultsData["environment"] as? String{
+
             
-            print("Setting Environment to: \(environment ?? "")")
+            print("Setting Environment to: \(environment)")
             
-            if environment?.uppercased() == "IN" {
+            if environment.uppercased() == "IN" {
                 baseURL = "https://c.in.webengage.com/tracker"
-            } else if environment?.uppercased() == "IR0" {
+            } else if environment.uppercased() == "IR0" {
                 baseURL = "https://c.ir0.webengage.com/tracker"
-            } else if environment?.uppercased() == "UNL" {
+            } else if environment.uppercased() == "UNL" {
                 baseURL = "https://c.unl.webengage.com/tracker"
-            } else if environment?.uppercased() == "KSA" {
+            } else if environment.uppercased() == "KSA" {
                 baseURL = "https://c.ksa.webengage.com/tracker"
-            } else if environment?.uppercased() == "STAGING" {
+            } else if environment.uppercased() == "STAGING" {
                 baseURL = "https://c.stg.webengage.biz/tracker"
             }
         }
@@ -182,7 +183,7 @@ struct Network {
         
         var systemData = [String: Any]()
         systemData["sdk_id"] = 3
-        if let sdkVersion = userDefaultsData["sdk_version"], let intValue = Int(sdkVersion) {
+        if let sdkVersion = userDefaultsData["sdk_version"] as? String, let intValue = Int(sdkVersion) {
             systemData["sdk_version"] = intValue
         }
         systemData["app_id"] = userDefaultsData["app_id"]

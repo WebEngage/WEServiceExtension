@@ -28,12 +28,12 @@ struct Utils {
     /// Get data from shared user defaults.
     ///
     /// - Returns: A dictionary with data from shared user defaults.
-    static func getDataFromSharedUserDefaults() -> [String : String]? {
+    static func getDataFromSharedUserDefaults() -> [String : Any]? {
         guard let defaults = getSharedUserDefaults() else {
             return nil
         }
         
-        var data = [String: String]()
+        var data = [String: Any]()
         data["license_code"] = defaults.string(forKey: "license_code")
         data["interface_id"] = defaults.string(forKey: "interface_id")
         if let sdkVersion = defaults.string(forKey: "sdk_version"), let intValue = Int(sdkVersion) {
@@ -41,10 +41,10 @@ struct Utils {
         }
         data["app_id"] = defaults.string(forKey: "app_id")
         data["proxy_url"] = defaults.string(forKey: "proxy_url")
-        if let proxyURL = data["proxy_url"]{
+        if let proxyURL = data["proxy_url"] as? String{
             PROXY_URL = proxyURL
         }
-        data["WEGShouldTrackIPLocation"] = defaults.string(forKey: "WEGShouldTrackIPLocation")
+        data["WEGTrackIPLocation"] = defaults.bool(forKey: "WEGTrackIPLocation")
         
         print("Environment: \(defaults.string(forKey: "environment") ?? "")")
         data["environment"] = defaults.string(forKey: "environment") ?? ""
@@ -111,15 +111,16 @@ struct Utils {
         }
     }
     
-    static func shouldTrackIPLocation(request: inout URLRequest) {
+    static func trackIPLocation(request: inout URLRequest) {
         guard let userDefaultsData = Utils.getDataFromSharedUserDefaults() else {
             return
         }
-        let shouldTrackIP = userDefaultsData["WEGShouldTrackIPLocation"]
-        
-        // Add x-geo-ignore flag to the request headers based on shouldTrackIP
-        if shouldTrackIP == "false" {
-            request.setValue("1", forHTTPHeaderField: "x-geo-ignore")
+        if let trackIP = userDefaultsData["WEGTrackIPLocation"] as? Bool{
+            
+            // Add x-geo-ignore flag to the request headers based on shouldTrackIP
+            if  (!trackIP){
+                request.setValue("1", forHTTPHeaderField: "x-geo-ignore")
+            }
         }
     }
     
