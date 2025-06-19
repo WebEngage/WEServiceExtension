@@ -9,11 +9,13 @@ import Foundation
 
 /// Utility functions for the service extension..
 struct Utils {
+    // MARK: - Variables
     
-    /// The version of the service extension.
-    static let WEX_SERVICE_EXTENSION_VERSION = "1.1.3"
-    static var PROXY_URL : String?
+    static var PROXY_URL: String?
     static var weNetworkInterceptor: AnyObject?
+    
+    // MARK: - Methods
+
     /// Get the current time in a formatted string.
     ///
     /// - Returns: A formatted date and time string.
@@ -28,26 +30,31 @@ struct Utils {
     /// Get data from shared user defaults.
     ///
     /// - Returns: A dictionary with data from shared user defaults.
-    static func getDataFromSharedUserDefaults() -> [String : String]? {
+    static func getDataFromSharedUserDefaults() -> [String: Any]? {
         guard let defaults = getSharedUserDefaults() else {
             return nil
         }
         
-        var data = [String: String]()
-        data["license_code"] = defaults.string(forKey: "license_code")
-        data["interface_id"] = defaults.string(forKey: "interface_id")
-        if let sdkVersion = defaults.string(forKey: "sdk_version"), let intValue = Int(sdkVersion) {
-            data["sdk_version"] = String(intValue)
+        var data = [String: Any]()
+        data[WEConstants.WEX_LICENSE_CODE] = defaults.string(forKey: WEConstants.WEX_LICENSE_CODE)
+        data[WEConstants.WEX_INTERFACE_ID] = defaults.string(forKey: WEConstants.WEX_INTERFACE_ID)
+        
+        if let sdkVersion = defaults.string(forKey: WEConstants.WEX_SDK_VERSION), let intValue = Int(sdkVersion) {
+            data[WEConstants.WEX_SDK_VERSION] = String(intValue)
         }
-        data["app_id"] = defaults.string(forKey: "app_id")
-        data["proxy_url"] = defaults.string(forKey: "proxy_url")
-        if let proxyURL = data["proxy_url"]{
+        
+        data[WEConstants.WEX_APP_ID] = defaults.string(forKey: WEConstants.WEX_APP_ID)
+        data[WEConstants.WEX_PROXY_URL] = defaults.string(forKey: WEConstants.WEX_PROXY_URL)
+        
+        if let proxyURL = data[WEConstants.WEX_PROXY_URL] as? String {
             PROXY_URL = proxyURL
         }
-        data["WEGShouldTrackIPLocation"] = defaults.string(forKey: "WEGShouldTrackIPLocation")
         
-        print("Environment: \(defaults.string(forKey: "environment") ?? "")")
-        data["environment"] = defaults.string(forKey: "environment") ?? ""
+        data[WEConstants.WEX_TRACK_IP_LOCATION] = defaults.bool(forKey: WEConstants.WEX_TRACK_IP_LOCATION)
+        
+        print("Environment: \(defaults.string(forKey: WEConstants.WEX_ENVIRONMENT) ?? "")")
+        data[WEConstants.WEX_ENVIRONMENT] = defaults.string(forKey: WEConstants.WEX_ENVIRONMENT) ?? ""
+        
         return data
     }
     
@@ -80,49 +87,68 @@ struct Utils {
         
         // for SPM Code it will be saved under : WEServiceExtension_version
         // for WebEngageBannerPush it will be saved under : WEG_Service_Extension_Version
-        sharedDefaults?.setValue(WEX_SERVICE_EXTENSION_VERSION, forKey: "WEServiceExtension_version")
+        sharedDefaults?.setValue(WEConstants.WEX_SERVICE_EXTENSION_VERSION, forKey: "WEServiceExtension_version")
         sharedDefaults?.synchronize()
     }
     
-    static func setProxyURL(urlrequest:inout URLRequest){
+    /// Modifies the given URLRequest to route through a proxy URL if applicable.
+    ///
+    /// - Parameter urlrequest: The request to be modified.
+    static func configureProxyURL(urlrequest: inout URLRequest) {
         if let urlStr = urlrequest.url?.absoluteString,
-           let proxy = PROXY_URL,proxy != "",
-           !urlStr.contains(proxy){
+           let proxy = PROXY_URL, proxy != "",
+           !urlStr.contains(proxy) {
             if let encodedUrl = urlStr.addingPercentEncoding(withAllowedCharacters: .urlUserAllowed),
                let newURL = URL(string: "\(proxy)?url=\(encodedUrl)") {
                 urlrequest.url = newURL
             }
         }
     }
-    
-    static func getInterceptedRequest(request: URLRequest, completionHandler: @escaping (URLRequest)->Void){
-        if let interceptor = Utils.weNetworkInterceptor{
-            interceptor.onRequest(request){ _modifiedRequest in
+
+    /// Intercepts and modifies a network request using a registered network interceptor.
+    ///
+    /// - Parameters:
+    ///   - request: The original network request.
+    ///   - completionHandler: A closure returning the modified request.
+    static func getInterceptedRequest(request: URLRequest, completionHandler: @escaping (URLRequest) -> Void) {
+        if let interceptor = Utils.weNetworkInterceptor {
+            interceptor.onRequest(request) { _modifiedRequest in
                 completionHandler(_modifiedRequest)
             }
         }
     }
-    
-    static func getInterceptedResponse(taskResponse: WENetworkResponse, completionHandler: @escaping (WENetworkResponse)->Void) {
-        if let interceptor = Utils.weNetworkInterceptor{
-            interceptor.onResponse(taskResponse){ _modifiedResponse in
+
+    /// Intercepts and modifies a network response using a registered network interceptor.
+    ///
+    /// - Parameters:
+    ///   - taskResponse: The original network response.
+    ///   - completionHandler: A closure returning the modified response.
+    static func getInterceptedResponse(taskResponse: WENetworkResponse, completionHandler: @escaping (WENetworkResponse) -> Void) {
+        if let interceptor = Utils.weNetworkInterceptor {
+            interceptor.onResponse(taskResponse) { _modifiedResponse in
                 completionHandler(_modifiedResponse)
             }
         }
     }
-    
-    static func shouldTrackIPLocation(request: inout URLRequest) {
+
+    /// Adds an `x-geo-ignore` header to the request if IP tracking is disabled.
+    ///
+    /// - Parameter request: The request to be modified.
+    static func trackIPLocation(request: inout URLRequest) {
         guard let userDefaultsData = Utils.getDataFromSharedUserDefaults() else {
             return
         }
-        let shouldTrackIP = userDefaultsData["WEGShouldTrackIPLocation"]
-        
-        // Add x-geo-ignore flag to the request headers based on shouldTrackIP
-        if shouldTrackIP == "false" {
-            request.setValue("1", forHTTPHeaderField: "x-geo-ignore")
+        if let trackIP = userDefaultsData[WEConstants.WEX_TRACK_IP_LOCATION] as? Bool {
+            // Add x-geo-ignore flag to the request headers if IP tracking is disabled
+            if !trackIP {
+                request.setValue("1", forHTTPHeaderField: "x-geo-ignore")
+            }
         }
     }
-    
+
+    /// Checks if an app group is properly configured.
+    ///
+    /// - Returns: `true` if the app group is configured, otherwise `false`.
     static func isAppGroupConfigured() -> Bool {
         guard let appGroup = getAppGroup() else {
             return false
@@ -134,7 +160,10 @@ struct Utils {
             return false
         }
     }
-    
+
+    /// Retrieves the app group identifier from the app's `Info.plist`.
+    ///
+    /// - Returns: The app group identifier if available, otherwise a default group identifier.
     static func getAppGroup() -> String? {
         if let appGroup = Bundle.main.object(forInfoDictionaryKey: "WEX_APP_GROUP") as? String {
             return appGroup
@@ -152,9 +181,17 @@ struct Utils {
         
         return nil
     }
-    
+
+    /// Logs an error message with the file name, function, and line number.
+    ///
+    /// - Parameters:
+    ///   - message: The error message to log.
+    ///   - file: The file where the log is called (default: `#file`).
+    ///   - function: The function where the log is called (default: `#function`).
+    ///   - line: The line number where the log is called (default: `#line`).
     static func ALog(_ message: String, file: String = #file, function: String = #function, line: Int = #line) {
         NSLog("%@ [Line %d] ERROR: %@", (function as NSString).lastPathComponent, line, message)
     }
+
     
 }
