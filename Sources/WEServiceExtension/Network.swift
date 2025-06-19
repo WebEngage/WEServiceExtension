@@ -76,8 +76,8 @@ struct Network {
 
         for eventName in events {
             if var requestForEvent = getRequestForTracker(eventName: eventName, bestAttemptContent: bestAttemptContent) {
-                Utils.setProxyURL(urlrequest: &requestForEvent)
-                Utils.shouldTrackIPLocation(request: &requestForEvent)
+                Utils.configureProxyURL(urlrequest: &requestForEvent)
+                Utils.trackIPLocation(request: &requestForEvent)
                 Utils.getInterceptedRequest(request: requestForEvent) { _modifiedRequest in
                     requestForEvent = _modifiedRequest
                     URLSession.shared.dataTask(with: requestForEvent) { data, response, error in
@@ -110,6 +110,8 @@ struct Network {
     static func getRequestForTracker(eventName: String, bestAttemptContent: UNMutableNotificationContent?) -> URLRequest? {
         if let url = URL(string: getBaseURL()) {
             print("Base url: \(url)")
+            //The below request is a var because in Swift using NSMutableURLRequest is not recommended
+            //The best way to achieve the equivalent rest using var instead of let while creating a request.
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.setValue("application/transit+json", forHTTPHeaderField: "Content-type")
@@ -126,20 +128,21 @@ struct Network {
     static func getBaseURL() -> String {
         var baseURL = "https://c.webengage.com/tracker"
         
-        if let userDefaultsData = Utils.getDataFromSharedUserDefaults() {
-            let environment = userDefaultsData["environment"]
+        if let userDefaultsData = Utils.getDataFromSharedUserDefaults(),
+           let environment = userDefaultsData["environment"] as? String{
+
             
-            print("Setting Environment to: \(environment ?? "")")
+            print("Setting Environment to: \(environment)")
             
-            if environment?.uppercased() == "IN" {
+            if environment.uppercased() == "IN" {
                 baseURL = "https://c.in.webengage.com/tracker"
-            } else if environment?.uppercased() == "IR0" {
+            } else if environment.uppercased() == "IR0" {
                 baseURL = "https://c.ir0.webengage.com/tracker"
-            } else if environment?.uppercased() == "UNL" {
+            } else if environment.uppercased() == "UNL" {
                 baseURL = "https://c.unl.webengage.com/tracker"
-            } else if environment?.uppercased() == "KSA" {
+            } else if environment.uppercased() == "KSA" {
                 baseURL = "https://c.ksa.webengage.com/tracker"
-            } else if environment?.uppercased() == "STAGING" {
+            } else if environment.uppercased() == "STAGING" {
                 baseURL = "https://c.stg.webengage.biz/tracker"
             }
         }
@@ -154,53 +157,53 @@ struct Network {
     ///   - bestAttemptContent: The best attempt notification content.
     /// - Returns: The request body data for event tracking.
     static func getTrackerRequestBody(eventName: String, bestAttemptContent: UNMutableNotificationContent?) -> Data? {
-        guard let userDefaultsData = Utils.getDataFromSharedUserDefaults() else {
-            return nil
-        }
-        
-        var body = [String: Any]()
-        body["event_name"] = eventName
-        body["category"] = "system"
-        body["suid"] = "null"
-        body["luid"] = "null"
-        body["cuid"] = "null"
-        body["event_time"] = Utils.getCurrentFormattedTime()
-        body["license_code"] = userDefaultsData["license_code"]
-        body["interface_id"] = userDefaultsData["interface_id"]
-        
-        if let customData = bestAttemptContent?.userInfo["customData"] as? [[String: Any]] {
-            var customDataDictionary = [String: Any]()
-            for customDataItem in customData {
-                if let key = customDataItem["key"] as? String, let value = customDataItem["value"] {
-                    customDataDictionary[key] = value
-                }
-            }
-            body["event_data"] = customDataDictionary
-        } else {
-            body["event_data"] = [String: Any]()
-        }
-        
-        var systemData = [String: Any]()
-        systemData["sdk_id"] = 3
-        if let sdkVersion = userDefaultsData["sdk_version"], let intValue = Int(sdkVersion) {
-            systemData["sdk_version"] = intValue
-        }
-        systemData["app_id"] = userDefaultsData["app_id"]
-        systemData["experiment_id"] = bestAttemptContent?.userInfo["experiment_id"]
-        systemData["id"] = bestAttemptContent?.userInfo["notification_id"]
-        
-        body["system_data"] = systemData
-        
-        body = WEHelper.dictionaryOfProperties(property: body) as! [String: Any]
-        
-        print("Data reporting to tracker: \(body)")
-        
-        do {
-            let data = try JSONSerialization.data(withJSONObject: body, options: .prettyPrinted)
-            return data
-        } catch {
-            print("Error in converting data: \(error)")
-            return nil
-        }
-    }
+           guard let userDefaultsData = Utils.getDataFromSharedUserDefaults() else {
+               return nil
+           }
+           
+           var body = [String: Any]()
+           body[WEConstants.WEX_EVENT_NAME] = eventName
+           body[WEConstants.WEX_CATEGORY] = "system"
+           body[WEConstants.WEX_SUID] = "null"
+           body[WEConstants.WEX_LUID] = "null"
+           body[WEConstants.WEX_CUID] = "null"
+           body[WEConstants.WEX_EVENT_TIME] = Utils.getCurrentFormattedTime()
+           body[WEConstants.WEX_LICENSE_CODE] = userDefaultsData[WEConstants.WEX_LICENSE_CODE]
+           body[WEConstants.WEX_INTERFACE_ID] = userDefaultsData[WEConstants.WEX_INTERFACE_ID]
+           
+           if let customData = bestAttemptContent?.userInfo[WEConstants.WEX_CUSTOM_DATA] as? [[String: Any]] {
+               var customDataDictionary = [String: Any]()
+               for customDataItem in customData {
+                   if let key = customDataItem[WEConstants.WEX_KEY] as? String, let value = customDataItem[WEConstants.WEX_VALUE] {
+                       customDataDictionary[key] = value
+                   }
+               }
+               body[WEConstants.WEX_EVENT_DATA] = customDataDictionary
+           } else {
+               body[WEConstants.WEX_EVENT_DATA] = [String: Any]()
+           }
+           
+           var systemData = [String: Any]()
+           systemData[WEConstants.WEX_SDK_ID] = 3
+           if let sdkVersion = userDefaultsData[WEConstants.WEX_SDK_VERSION] as? String, let intValue = Int(sdkVersion) {
+               systemData[WEConstants.WEX_SDK_VERSION] = intValue
+           }
+           systemData[WEConstants.WEX_APP_ID] = userDefaultsData[WEConstants.WEX_APP_ID]
+           systemData[WEConstants.WEX_EXPERIMENT_ID] = bestAttemptContent?.userInfo[WEConstants.WEX_EXPERIMENT_ID]
+           systemData[WEConstants.WEX_NOTIFICATION_ID] = bestAttemptContent?.userInfo[WEConstants.WEX_NOTIFICATION_ID]
+           
+           body[WEConstants.WEX_SYSTEM_DATA] = systemData
+           
+           body = WEHelper.dictionaryOfProperties(property: body) as! [String: Any]
+           
+           print("Data reporting to tracker: \(body)")
+           
+           do {
+               let data = try JSONSerialization.data(withJSONObject: body, options: .prettyPrinted)
+               return data
+           } catch {
+               print("Error in converting data: \(error)")
+               return nil
+           }
+       }
 }
