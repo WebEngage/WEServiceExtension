@@ -32,6 +32,8 @@ open class WEXPushNotificationService: UNNotificationServiceExtension {
             Utils.weNetworkInterceptor = (self.notificationDelegate != nil) ? self.notificationDelegate : self
             
             print("Push Notification content: \(request.content.userInfo)")
+
+            WEXLogProcessor.logReceivedNotification(loglevel: WEGLogLevel.info, message: "Push Notification Received by service Extension", notification: self.bestAttemptContent)
             
             if let expandableDetails = request.content.userInfo["expandableDetails"] as? [String: Any], let style = expandableDetails["style"] as? String {
                 if style == "CAROUSEL_V1", let items = expandableDetails["items"] as? [[String: Any]] {
@@ -95,6 +97,7 @@ open class WEXPushNotificationService: UNNotificationServiceExtension {
     }
     
     open override func serviceExtensionTimeWillExpire() {
+        WEXDebugger.flushEvents()
         if let contentHandler = contentHandler, let bestAttemptContent = bestAttemptContent {
             contentHandler(bestAttemptContent)
         }

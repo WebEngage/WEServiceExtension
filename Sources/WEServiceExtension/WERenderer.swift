@@ -23,6 +23,7 @@ struct WERenderer {
             drawBannerView(with: image, bestAttemptContent: bestAttemptContent, contentHandler: contentHandler)
         } else {
             Network.trackEvent(completion: {
+                WEXDebugger.flushEvents()
                 if let bestAttemptContent = bestAttemptContent {
                     contentHandler?(bestAttemptContent)
                 }
@@ -37,13 +38,15 @@ struct WERenderer {
     ///   - bestAttemptContent: The best attempt notification content.
     ///   - contentHandler: A closure for handling the notification content.
     static func drawBannerView(with urlStr: String, bestAttemptContent: UNMutableNotificationContent?, contentHandler: ((UNNotificationContent) -> Void)?) {
+        WEXLogProcessor.logImageDownloading(loglevel: WEGLogLevel.info, message: "Downloading \(urlStr)", notification: bestAttemptContent)
         Network.fetchAttachment(for: urlStr, at: 0) { attachment, index in
             if let attachment = attachment {
-                print("WebEngage Downloaded Image for Rating Layout")
+                print("WebEngage Downloaded Image")
                 bestAttemptContent?.attachments = [attachment]
             }
             
             Network.trackEvent(completion: {
+                WEXDebugger.flushEvents()
                 contentHandler?(bestAttemptContent ?? UNMutableNotificationContent())
             }, bestAttemptContent: bestAttemptContent, contentHandler: contentHandler)
         }
@@ -67,6 +70,7 @@ struct WERenderer {
         
         for carouselItem in items {
             if let imageURL = carouselItem["image"] as? String {
+                WEXLogProcessor.logImageDownloading(loglevel: WEGLogLevel.info, message: "Downloading \(imageURL)", notification: bestAttemptContent)
                 Network.fetchAttachment(for: imageURL, at: itemCounter) { attachment, index in
                     imageDownloadAttemptCounter += 1
                     
@@ -79,6 +83,7 @@ struct WERenderer {
                     if imageDownloadAttemptCounter == items.count {
                         Network.trackEvent(completion: {
                             print("Ending WebEngage Rich Push Service")
+                            WEXDebugger.flushEvents()
                             if let bestAttemptContent = bestAttemptContent {
                                 contentHandler?(bestAttemptContent)
                             }

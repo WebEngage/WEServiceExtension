@@ -42,6 +42,7 @@ struct Network {
             
             if let error = error {
                 print(error)
+                WEXLogProcessor.logImageDownloadingFailed(loglevel: WEGLogLevel.error, message: "Image Downloading failed for \(urlString): \(error)")
             } else {
                 if let temporaryFileLocation = temporaryFileLocation {
                     let localURL = URL(fileURLWithPath: temporaryFileLocation.path + fileExt)
