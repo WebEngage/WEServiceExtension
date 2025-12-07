@@ -17,7 +17,7 @@ struct Network {
     ///   - urlString: The URL of the attachment.
     ///   - index: The index of the attachment.
     ///   - completionHandler: A closure to handle the attachment and index.
-    static func fetchAttachment(for urlString: String, at index: Int, completionHandler: @escaping (UNNotificationAttachment?, Int) -> Void) {
+    static func fetchAttachment(for urlString: String, at index: Int, bestAttemptContent: UNMutableNotificationContent?, completionHandler: @escaping (UNNotificationAttachment?, Int) -> Void) {
         var fileExt = "." + (urlString as NSString).pathExtension
         let fileExtensionLength = fileExt.count
         
@@ -42,7 +42,7 @@ struct Network {
             
             if let error = error {
                 print(error)
-                WEXLogProcessor.logImageDownloadingFailed(loglevel: WEGLogLevel.error, message: "Image Downloading failed for \(urlString): \(error)")
+                WEXLogProcessor.logImageDownloadingFailed(loglevel: WEGLogLevel.error, message: "Image Downloading failed for \(urlString): \(error)", notification: bestAttemptContent)
             } else {
                 if let temporaryFileLocation = temporaryFileLocation {
                     let localURL = URL(fileURLWithPath: temporaryFileLocation.path + fileExt)
@@ -89,6 +89,7 @@ struct Network {
                                 print("Could not log \(eventName) event with error: \(error)")
                             } else {
                                 print("Push Tracker URLResponse: \(networkResponse.response.debugDescription)")
+                                WEXLogProcessor.logtrackEvent(loglevel: WEGLogLevel.info, event: eventName,notification: bestAttemptContent )
                             }
                         }
                         completion?()

@@ -39,7 +39,7 @@ struct WERenderer {
     ///   - contentHandler: A closure for handling the notification content.
     static func drawBannerView(with urlStr: String, bestAttemptContent: UNMutableNotificationContent?, contentHandler: ((UNNotificationContent) -> Void)?) {
         WEXLogProcessor.logImageDownloading(loglevel: WEGLogLevel.info, message: "Downloading \(urlStr)", notification: bestAttemptContent)
-        Network.fetchAttachment(for: urlStr, at: 0) { attachment, index in
+        Network.fetchAttachment(for: urlStr, at: 0,bestAttemptContent: bestAttemptContent) { attachment, index in
             if let attachment = attachment {
                 print("WebEngage Downloaded Image")
                 bestAttemptContent?.attachments = [attachment]
@@ -71,7 +71,7 @@ struct WERenderer {
         for carouselItem in items {
             if let imageURL = carouselItem["image"] as? String {
                 WEXLogProcessor.logImageDownloading(loglevel: WEGLogLevel.info, message: "Downloading \(imageURL)", notification: bestAttemptContent)
-                Network.fetchAttachment(for: imageURL, at: itemCounter) { attachment, index in
+                Network.fetchAttachment(for: imageURL, at: itemCounter,bestAttemptContent: bestAttemptContent) { attachment, index in
                     imageDownloadAttemptCounter += 1
                     
                     if let attachment = attachment {

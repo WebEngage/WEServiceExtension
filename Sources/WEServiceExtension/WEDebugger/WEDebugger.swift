@@ -86,7 +86,7 @@ struct WEXDebugger {
     private static func sendEvents(_ events: [[String: Any]],
                            completion: @escaping (Int, Error?) -> Void) {
         
-        guard let defaults = Utils.getSharedUserDefaults(), let urlString = defaults.string(forKey: WEConstants.KEY_DEBUGGER_EVENT_SYNC_URL) else {
+        guard let defaults = Utils.getSharedUserDefaults(), let urlString = defaults.string(forKey: WEDConstants.KEY_DEBUGGER_EVENT_SYNC_URL) else {
             return
         }
                 
@@ -145,13 +145,13 @@ public class WEGMetadataBuilder: NSObject {
     private var tags: [[String: Any]] = []
     
     public func addTag(_ tag: String, metadata: [String: Any]) -> WEGMetadataBuilder {
-        if let index = tags.firstIndex(where: { $0["tag"] as? String == tag }) {
-            if var existingMetadata = tags[index]["metadata"] as? [String: Any] {
+        if let index = tags.firstIndex(where: { $0[WEDConstants.KEY_TAG] as? String == tag }) {
+            if var existingMetadata = tags[index][WEDConstants.KEY_METADATA] as? [String: Any] {
                 existingMetadata.merge(metadata) { _, new in new }
-                tags[index] = ["tag": tag, "metadata": existingMetadata]
+                tags[index] = [WEDConstants.KEY_TAG: tag, WEDConstants.KEY_METADATA: existingMetadata]
             }
         } else {
-            tags.append(["tag": tag, "metadata": metadata])
+            tags.append([WEDConstants.KEY_TAG: tag, WEDConstants.KEY_METADATA: metadata])
         }
         return self
     }
@@ -202,15 +202,15 @@ public class WEGLogBuilder: NSObject {
 @objcMembers
 public class WEXLogProcessor: NSObject {
     public static func logReceivedNotification(loglevel: WEGLogLevel, message: Any, notification: UNMutableNotificationContent?){
-        if(!Utils.isDebuggerEnabled()){
+        if(!WEDUtils.isDebuggerEnabled()){
             return
         }
-        let userInfo = Utils.convertUserInfoToDictionary(notification)
-        let campaign_id: String = userInfo["notification_id"] as? String ?? ""
+        let userInfo = WEDUtils.convertUserInfoToDictionary(notification)
+        let campaign_id: String = userInfo[WEDConstants.KEY_NOTIFICATION_ID] as? String ?? ""
         let tags = WEGMetadataBuilder.create()
-            .addTag("Push Notification", metadata: [loglevel.description: userInfo])
-            .addTag("Campaign_id", metadata: [loglevel.description : campaign_id])
-            .addTag(WEConstants.WE_SERVICE_EXTENSION, metadata: [loglevel.description :["sdk_version": WEConstants.WEX_SERVICE_EXTENSION_VERSION,"message":message]])
+            .addTag(WEDConstants.TAG_PUSH_NOTIFICATION, metadata: [loglevel.description: userInfo])
+            .addTag(WEDConstants.TAG_CAMPAIGN_ID, metadata: [loglevel.description : campaign_id])
+            .addTag(WEDConstants.WE_SERVICE_EXTENSION, metadata: [loglevel.description :[WEDConstants.KEY_SDK_VERSION: WEConstants.WEX_SERVICE_EXTENSION_VERSION, WEDConstants.KEY_MESSAGE: message]])
             .build()
         
         let debugData = WEGLogBuilder()
@@ -219,24 +219,50 @@ public class WEXLogProcessor: NSObject {
             .metadata(tags)
             .buildEventData()
         
-        if let event = WEXDebugger.createEvent(eventName: "Service Extension", debugData: debugData){
+        if let event = WEXDebugger.createEvent(eventName: WEDConstants.EVENT_SERVICE_EXTENSION, debugData: debugData){
             WEXDebugger.queueEvent(event) { statusCode, error in
-                print("Debugger Data sent")
+                print(WEDConstants.MSG_DEBUGGER_DATA_SENT)
+            }
+        }
+    }
+    
+    public static func logtrackEvent(loglevel: WEGLogLevel, event: Any,notification: UNMutableNotificationContent? ){
+        if(!WEDUtils.isDebuggerEnabled()){
+            return
+        }
+        
+        let userInfo = WEDUtils.convertUserInfoToDictionary(notification)
+        let campaign_id: String = userInfo[WEDConstants.KEY_NOTIFICATION_ID] as? String ?? ""
+        let tags = WEGMetadataBuilder.create()
+            .addTag(WEDConstants.TAG_PUSH_NOTIFICATION, metadata: userInfo)
+            .addTag(WEDConstants.TAG_CAMPAIGN_ID, metadata: [loglevel.description : campaign_id])
+            .addTag(WEDConstants.WE_SERVICE_EXTENSION, metadata: [loglevel.description :[WEDConstants.KEY_SDK_VERSION: WEConstants.WEX_SERVICE_EXTENSION_VERSION, WEDConstants.KEY_MESSAGE: event]])
+            .build()
+        
+        let debugData = WEGLogBuilder()
+            .level(loglevel.description)
+            .message(campaign_id)
+            .metadata(tags)
+            .buildEventData()
+        
+        if let event = WEXDebugger.createEvent(eventName: WEDConstants.EVENT_SERVICE_EXTENSION_EVENT, debugData: debugData){
+            WEXDebugger.queueEvent(event) { statusCode, error in
+                print(WEDConstants.MSG_DEBUGGER_DATA_SENT)
             }
         }
     }
     
     public static func logImageDownloading(loglevel: WEGLogLevel, message: Any, notification: UNMutableNotificationContent?){
-        if(!Utils.isDebuggerEnabled()){
+        if(!WEDUtils.isDebuggerEnabled()){
             return
         }
-        let userInfo = Utils.convertUserInfoToDictionary(notification)
+        let userInfo = WEDUtils.convertUserInfoToDictionary(notification)
 
-        let campaign_id: String = userInfo["notification_id"] as? String ?? ""
+        let campaign_id: String = userInfo[WEDConstants.KEY_NOTIFICATION_ID] as? String ?? ""
         let tags = WEGMetadataBuilder.create()
-            .addTag("Push Notification", metadata: [loglevel.description: userInfo])
-            .addTag("Campaign_id", metadata: [loglevel.description : campaign_id])
-            .addTag(WEConstants.WE_SERVICE_EXTENSION, metadata: [loglevel.description :["sdk_version": WEConstants.WEX_SERVICE_EXTENSION_VERSION,"message":message]])
+            .addTag(WEDConstants.TAG_PUSH_NOTIFICATION, metadata: [loglevel.description: userInfo])
+            .addTag(WEDConstants.TAG_CAMPAIGN_ID, metadata: [loglevel.description : campaign_id])
+            .addTag("Resource Downloading", metadata: [loglevel.description :[WEDConstants.KEY_SDK_VERSION: WEConstants.WEX_SERVICE_EXTENSION_VERSION, WEDConstants.KEY_MESSAGE: message]])
             .build()
         
         let debugData = WEGLogBuilder()
@@ -245,32 +271,34 @@ public class WEXLogProcessor: NSObject {
             .metadata(tags)
             .buildEventData()
         
-        if let event = WEXDebugger.createEvent(eventName: "Service Extension", debugData: debugData){
+        if let event = WEXDebugger.createEvent(eventName: WEDConstants.EVENT_SERVICE_EXTENSION, debugData: debugData){
             WEXDebugger.queueEvent(event) { statusCode, error in
-                print("Debugger Data sent")
+                print(WEDConstants.MSG_DEBUGGER_DATA_SENT)
             }
         }
     }
     
-    public static func logImageDownloadingFailed(loglevel: WEGLogLevel, message: Any){
-        if(!Utils.isDebuggerEnabled()){
+    public static func logImageDownloadingFailed(loglevel: WEGLogLevel, message: Any, notification: UNMutableNotificationContent? ){
+        if(!WEDUtils.isDebuggerEnabled()){
             return
         }
-
+        let userInfo = WEDUtils.convertUserInfoToDictionary(notification)
+        let campaign_id: String = userInfo[WEDConstants.KEY_NOTIFICATION_ID] as? String ?? ""
+        
         let tags = WEGMetadataBuilder.create()
-            .addTag("Push Notification", metadata: [loglevel.description:""])
-            .addTag(WEConstants.WE_SERVICE_EXTENSION, metadata: [loglevel.description :["sdk_version": WEConstants.WEX_SERVICE_EXTENSION_VERSION,"message":message]])
+            .addTag(WEDConstants.TAG_PUSH_NOTIFICATION, metadata: [loglevel.description:""])
+            .addTag(WEDConstants.WE_SERVICE_EXTENSION, metadata: [loglevel.description :[WEDConstants.KEY_SDK_VERSION: WEConstants.WEX_SERVICE_EXTENSION_VERSION, WEDConstants.KEY_MESSAGE: message]])
             .build()
         
         let debugData = WEGLogBuilder()
             .level(loglevel.description)
-            .message("Image Download Failed")
+            .message("Image Download Failed \(campaign_id)")
             .metadata(tags)
             .buildEventData()
         
         if let event = WEXDebugger.createEvent(eventName: "ServiceExtension", debugData: debugData){
             WEXDebugger.queueEvent(event) { statusCode, error in
-                print("Debugger Data sent")
+                print(WEDConstants.MSG_DEBUGGER_DATA_SENT)
             }
         }
     }

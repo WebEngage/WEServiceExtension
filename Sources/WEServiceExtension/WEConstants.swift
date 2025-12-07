@@ -28,8 +28,7 @@ struct WEConstants{
     static let WEX_SDK_ID = "sdk_id"
     static let WEX_EXPERIMENT_ID = "experiment_id"
     static let WEX_NOTIFICATION_ID = "notification_id"
-    static let KEY_DEBUGGER_EVENT_SYNC_URL = "debugger_event_sync_url"
-    static let WE_SERVICE_EXTENSION = "WEServiceExtension"
+   
     
     /// Keys for notification payload
     static let WEX_CUSTOM_DATA = "customData"
@@ -37,16 +36,3 @@ struct WEConstants{
     static let WEX_VALUE = "value"
 }
 
-@objc public enum WEGLogLevel: Int {
-    case debug, info, warning, error, critical
-    
-    var description: String {
-        switch self {
-        case .debug: return "debug"
-        case .info: return "info"
-        case .warning: return "warning"
-        case .error: return "error"
-        case .critical: return "critical"
-        }
-    }
-}
