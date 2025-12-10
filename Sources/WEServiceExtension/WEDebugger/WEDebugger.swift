@@ -263,6 +263,7 @@ public class WEXLogProcessor: NSObject {
             .addTag(WEDConstants.TAG_PUSH_NOTIFICATION, metadata: [loglevel.description: userInfo])
             .addTag(WEDConstants.TAG_CAMPAIGN_ID, metadata: [loglevel.description : campaign_id])
             .addTag("Resource Downloading", metadata: [loglevel.description :[WEDConstants.KEY_SDK_VERSION: WEConstants.WEX_SERVICE_EXTENSION_VERSION, WEDConstants.KEY_MESSAGE: message]])
+            .addTag(WEDConstants.WE_SERVICE_EXTENSION, metadata: [:])
             .build()
         
         let debugData = WEGLogBuilder()
