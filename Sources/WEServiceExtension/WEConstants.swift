@@ -28,6 +28,7 @@ struct WEConstants{
     static let WEX_SDK_ID = "sdk_id"
     static let WEX_EXPERIMENT_ID = "experiment_id"
     static let WEX_NOTIFICATION_ID = "notification_id"
+    static let WEX_ID = "id"
     
     /// Keys for notification payload
     static let WEX_CUSTOM_DATA = "customData"
