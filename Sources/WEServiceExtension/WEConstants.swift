@@ -9,7 +9,7 @@ import Foundation
 struct WEConstants{
     
     // MARK: - Constants
-    static let WEX_SERVICE_EXTENSION_VERSION = "1.2.0"
+    static let WEX_SERVICE_EXTENSION_VERSION = "1.2.1"
     static let WEX_TRACK_IP_LOCATION = "WEGTrackIPLocation"
     static let WEX_PROXY_URL = "proxy_url"
     static let WEX_LICENSE_CODE = "license_code"
