@@ -190,7 +190,7 @@ struct Network {
            }
            systemData[WEConstants.WEX_APP_ID] = userDefaultsData[WEConstants.WEX_APP_ID]
            systemData[WEConstants.WEX_EXPERIMENT_ID] = bestAttemptContent?.userInfo[WEConstants.WEX_EXPERIMENT_ID]
-           systemData[WEConstants.WEX_NOTIFICATION_ID] = bestAttemptContent?.userInfo[WEConstants.WEX_NOTIFICATION_ID]
+           systemData[WEConstants.WEX_ID] = bestAttemptContent?.userInfo[WEConstants.WEX_NOTIFICATION_ID]
            
            body[WEConstants.WEX_SYSTEM_DATA] = systemData
            
