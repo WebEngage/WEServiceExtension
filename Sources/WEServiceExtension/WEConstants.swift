@@ -9,7 +9,7 @@ import Foundation
 struct WEConstants{
     
     // MARK: - Constants
-    static let WEX_SERVICE_EXTENSION_VERSION = "1.2.0"
+    static let WEX_SERVICE_EXTENSION_VERSION = "1.2.1"
     static let WEX_TRACK_IP_LOCATION = "WEGTrackIPLocation"
     static let WEX_PROXY_URL = "proxy_url"
     static let WEX_LICENSE_CODE = "license_code"
@@ -28,6 +28,7 @@ struct WEConstants{
     static let WEX_SDK_ID = "sdk_id"
     static let WEX_EXPERIMENT_ID = "experiment_id"
     static let WEX_NOTIFICATION_ID = "notification_id"
+    static let WEX_ID = "id"
     
     /// Keys for notification payload
     static let WEX_CUSTOM_DATA = "customData"
