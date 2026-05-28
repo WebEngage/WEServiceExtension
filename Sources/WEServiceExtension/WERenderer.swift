@@ -39,7 +39,6 @@ struct WERenderer {
     static func drawBannerView(with urlStr: String, bestAttemptContent: UNMutableNotificationContent?, contentHandler: ((UNNotificationContent) -> Void)?) {
         Network.fetchAttachment(for: urlStr, at: 0) { attachment, index in
             if let attachment = attachment {
-                print("WebEngage Downloaded Image for Rating Layout")
                 bestAttemptContent?.attachments = [attachment]
             }
             
@@ -49,44 +48,83 @@ struct WERenderer {
         }
     }
     
-    /// Draw a carousel view for a notification with multiple items.
+    /// Draw a multi-image view for a notification with multiple items.
     ///
     /// - Parameters:
-    ///   - items: An array of items for the carousel.
+    ///   - items: An array of items for the multi-image layout.
+    ///   - backgroundImage: Optional background image URL (downloaded at index 0, shifts item indices by 1).
     ///   - bestAttemptContent: The best attempt notification content.
     ///   - contentHandler: A closure for handling the notification content.
-    static func drawCarouselView(with items: [[String: Any]], bestAttemptContent: UNMutableNotificationContent?, contentHandler: ((UNNotificationContent) -> Void)?) {
-        var attachmentsArray = [UNNotificationAttachment]()
+    static func drawMultiImageView(with items: [[String: Any]], backgroundImage: String? = nil, bestAttemptContent: UNMutableNotificationContent?, contentHandler: ((UNNotificationContent) -> Void)?) {
+        let hasBgImage = backgroundImage != nil && !backgroundImage!.isEmpty
+        let indexOffset = hasBgImage ? 1 : 0
         
-        guard items.count > 0 else {
-            return
+        let imageItems = items.enumerated().compactMap { index, item -> (Int, String)? in
+            guard let imageURL = item["image"] as? String else { return nil }
+            return (index + indexOffset, imageURL)
         }
         
-        var itemCounter = 0
-        var imageDownloadAttemptCounter = 0
+        guard !imageItems.isEmpty else { return }
         
-        for carouselItem in items {
-            if let imageURL = carouselItem["image"] as? String {
-                Network.fetchAttachment(for: imageURL, at: itemCounter) { attachment, index in
-                    imageDownloadAttemptCounter += 1
-                    
-                    if let attachment = attachment {
-                        print("Downloaded Attachment No. \(index)")
-                        attachmentsArray.append(attachment)
-                        bestAttemptContent?.attachments = attachmentsArray
-                    }
-                    
-                    if imageDownloadAttemptCounter == items.count {
-                        Network.trackEvent(completion: {
-                            print("Ending WebEngage Rich Push Service")
-                            if let bestAttemptContent = bestAttemptContent {
-                                contentHandler?(bestAttemptContent)
-                            }
-                        }, bestAttemptContent: bestAttemptContent, contentHandler: contentHandler)
-                    }
+        let totalDownloads = imageItems.count + indexOffset
+        var attachmentsArray = [UNNotificationAttachment]()
+        var downloadAttemptCounter = 0
+        var hasFailure = false
+        let lock = NSLock()
+        
+        let completionCheck = {
+            lock.lock()
+            downloadAttemptCounter += 1
+            let isComplete = downloadAttemptCounter == totalDownloads
+            let shouldFallback = hasFailure
+            lock.unlock()
+            
+            if isComplete {
+                if shouldFallback {
+                    markAsFallback(bestAttemptContent: bestAttemptContent)
                 }
-                itemCounter += 1
+                Network.trackEvent(completion: {
+                    if let bestAttemptContent = bestAttemptContent {
+                        contentHandler?(bestAttemptContent)
+                    }
+                }, bestAttemptContent: bestAttemptContent, contentHandler: contentHandler)
             }
         }
+        
+        if let bgImage = backgroundImage, !bgImage.isEmpty {
+            Network.fetchAttachment(for: bgImage, at: 0) { attachment, _ in
+                if let attachment = attachment {
+                    lock.lock()
+                    attachmentsArray.append(attachment)
+                    bestAttemptContent?.attachments = attachmentsArray
+                    lock.unlock()
+                }
+                completionCheck()
+            }
+        }
+        
+        for (index, imageURL) in imageItems {
+            Network.fetchAttachment(for: imageURL, at: index) { attachment, _ in
+                lock.lock()
+                if let attachment = attachment {
+                    attachmentsArray.append(attachment)
+                    bestAttemptContent?.attachments = attachmentsArray
+                } else {
+                    hasFailure = true
+                }
+                lock.unlock()
+                completionCheck()
+            }
+        }
+    }
+    
+    /// Marks the notification as fallback by adding is_fallback=true to customData in userInfo.
+    private static func markAsFallback(bestAttemptContent: UNMutableNotificationContent?) {
+        guard let bestAttemptContent = bestAttemptContent else { return }
+        var userInfo = bestAttemptContent.userInfo
+        var customData = userInfo["customData"] as? [[String: Any]] ?? []
+        customData.append(["key": "is_fallback", "value": true])
+        userInfo["customData"] = customData
+        bestAttemptContent.userInfo = userInfo
     }
 }

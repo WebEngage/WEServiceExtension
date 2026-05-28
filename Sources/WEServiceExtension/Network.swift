@@ -42,6 +42,8 @@ struct Network {
             
             if let error = error {
                 print(error)
+            } else if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode < 200 || httpResponse.statusCode >= 300 {
+                print("Image download failed with status code: \(httpResponse.statusCode)")
             } else {
                 if let temporaryFileLocation = temporaryFileLocation {
                     let localURL = URL(fileURLWithPath: temporaryFileLocation.path + fileExt)
