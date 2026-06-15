@@ -192,6 +192,14 @@ struct Utils {
     static func ALog(_ message: String, file: String = #file, function: String = #function, line: Int = #line) {
         NSLog("%@ [Line %d] ERROR: %@", (function as NSString).lastPathComponent, line, message)
     }
+    
+    // Header is only added when proxy is set; not sent as "false" otherwise to avoid unnecessary overhead on every request
+    static func appendCustomProxyHeader(request: inout URLRequest) {
+        if let proxy = PROXY_URL, !proxy.isEmpty {
+            request.setValue("true", forHTTPHeaderField: "X-Custom-Proxy")
+        }
+    }
+
 
     
 }
