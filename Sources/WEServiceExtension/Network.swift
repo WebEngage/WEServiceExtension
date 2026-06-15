@@ -144,6 +144,8 @@ struct Network {
                 baseURL = "https://c.ksa.webengage.com/tracker"
             } else if environment.uppercased() == "STAGING" {
                 baseURL = "https://c.stg.webengage.biz/tracker"
+            } else if environment.uppercased() == "EUG"{
+                baseURL = "https://c.eug.webengage.com/tracker"
             }
         }
         
