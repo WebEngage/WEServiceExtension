@@ -80,6 +80,7 @@ struct Network {
                 Utils.trackIPLocation(request: &requestForEvent)
                 Utils.getInterceptedRequest(request: requestForEvent) { _modifiedRequest in
                     requestForEvent = _modifiedRequest
+                    Utils.appendCustomProxyHeader(request: &requestForEvent)
                     URLSession.shared.dataTask(with: requestForEvent) { data, response, error in
                         var networkResponse = WENetworkResponse.create(data: data, response: response, error: error)
                         Utils.getInterceptedResponse(taskResponse: networkResponse) { _modifiedResponse in
