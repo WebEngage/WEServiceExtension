@@ -80,6 +80,7 @@ struct Network {
                 Utils.trackIPLocation(request: &requestForEvent)
                 Utils.getInterceptedRequest(request: requestForEvent) { _modifiedRequest in
                     requestForEvent = _modifiedRequest
+                    Utils.appendCustomProxyHeader(request: &requestForEvent)
                     URLSession.shared.dataTask(with: requestForEvent) { data, response, error in
                         var networkResponse = WENetworkResponse.create(data: data, response: response, error: error)
                         Utils.getInterceptedResponse(taskResponse: networkResponse) { _modifiedResponse in
@@ -144,6 +145,8 @@ struct Network {
                 baseURL = "https://c.ksa.webengage.com/tracker"
             } else if environment.uppercased() == "STAGING" {
                 baseURL = "https://c.stg.webengage.biz/tracker"
+            } else if environment.uppercased() == "EUG"{
+                baseURL = "https://c.eug.webengage.com/tracker"
             }
         }
         
