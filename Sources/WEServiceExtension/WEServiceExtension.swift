@@ -97,6 +97,7 @@ open class WEXPushNotificationService: UNNotificationServiceExtension {
     }
     
     open override func serviceExtensionTimeWillExpire() {
+        WEXLogProcessor.logServiceExtensionExpired(notification: bestAttemptContent)
         WEXDebugger.flushEvents()
         if let contentHandler = contentHandler, let bestAttemptContent = bestAttemptContent {
             contentHandler(bestAttemptContent)

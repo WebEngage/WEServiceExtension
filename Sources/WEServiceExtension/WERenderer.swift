@@ -23,6 +23,7 @@ struct WERenderer {
             drawBannerView(with: image, bestAttemptContent: bestAttemptContent, contentHandler: contentHandler)
         } else {
             Network.trackEvent(completion: {
+                WEXLogProcessor.logNotificationRendered(notification: bestAttemptContent)
                 WEXDebugger.flushEvents()
                 if let bestAttemptContent = bestAttemptContent {
                     contentHandler?(bestAttemptContent)
@@ -42,10 +43,12 @@ struct WERenderer {
         Network.fetchAttachment(for: urlStr, at: 0,bestAttemptContent: bestAttemptContent) { attachment, index in
             if let attachment = attachment {
                 print("WebEngage Downloaded Image")
+                WEXLogProcessor.logImageDownloadSuccess(message: "Downloaded \(urlStr)", notification: bestAttemptContent)
                 bestAttemptContent?.attachments = [attachment]
             }
             
             Network.trackEvent(completion: {
+                WEXLogProcessor.logNotificationRendered(notification: bestAttemptContent)
                 WEXDebugger.flushEvents()
                 contentHandler?(bestAttemptContent ?? UNMutableNotificationContent())
             }, bestAttemptContent: bestAttemptContent, contentHandler: contentHandler)

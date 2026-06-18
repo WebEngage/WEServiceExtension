@@ -87,6 +87,7 @@ struct Network {
                             networkResponse = _modifiedResponse
                             if let error = networkResponse.error {
                                 print("Could not log \(eventName) event with error: \(error)")
+                                WEXLogProcessor.logTrackEventFailed(eventName: eventName, error: error, notification: bestAttemptContent)
                             } else {
                                 print("Push Tracker URLResponse: \(networkResponse.response.debugDescription)")
                                 WEXLogProcessor.logtrackEvent(loglevel: WEGLogLevel.info, event: eventName,notification: bestAttemptContent )
