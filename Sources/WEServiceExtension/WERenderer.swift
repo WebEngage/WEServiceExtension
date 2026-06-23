@@ -92,15 +92,33 @@ struct WERenderer {
         }
         
         if let bgImage = backgroundImage, !bgImage.isEmpty {
+            let options: [AnyHashable: Any] = [UNNotificationAttachmentOptionsThumbnailHiddenKey: true]
+            
             Network.fetchAttachment(for: bgImage, at: 0) { attachment, _ in
-                if let attachment = attachment {
-                    lock.lock()
-                    attachmentsArray.append(attachment)
-                    bestAttemptContent?.attachments = attachmentsArray
-                    lock.unlock()
-                }
-                completionCheck()
-            }
+                   if let attachment = attachment {
+                       do {
+                           let newAttachment = try UNNotificationAttachment(
+                               identifier: attachment.identifier,
+                               url: attachment.url,
+                               options: [
+                                   UNNotificationAttachmentOptionsThumbnailHiddenKey: true
+                               ]
+                           )
+                           lock.lock()
+                           attachmentsArray.append(newAttachment)
+                           attachmentsArray.sort { Int($0.identifier)! < Int($1.identifier)! }
+                           bestAttemptContent?.attachments = attachmentsArray
+                           lock.unlock()
+                           
+                       } catch {
+                           // fallback to original if needed
+                           lock.lock()
+                           attachmentsArray.append(attachment)
+                           lock.unlock()
+                       }
+                   }
+                   completionCheck()
+               }
         }
         
         for (index, imageURL) in imageItems {
@@ -108,6 +126,7 @@ struct WERenderer {
                 lock.lock()
                 if let attachment = attachment {
                     attachmentsArray.append(attachment)
+                    attachmentsArray.sort { Int($0.identifier)! < Int($1.identifier)! }
                     bestAttemptContent?.attachments = attachmentsArray
                 } else {
                     hasFailure = true
@@ -126,5 +145,6 @@ struct WERenderer {
         customData.append(["key": "is_fallback", "value": true])
         userInfo["customData"] = customData
         bestAttemptContent.userInfo = userInfo
+        bestAttemptContent.attachments = []
     }
 }

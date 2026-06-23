@@ -33,7 +33,7 @@ struct Network {
         var request = URLRequest(url: url)
         request.cachePolicy = .useProtocolCachePolicy
         request.timeoutInterval = 10.0
-        request.allHTTPHeaderFields = ["Accept": "image/webp"]
+        request.setValue("image/webp,image/gif", forHTTPHeaderField: "Accept")
         request.httpMethod = "GET"
         
         let session = URLSession.shared
