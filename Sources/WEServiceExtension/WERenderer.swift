@@ -106,7 +106,7 @@ struct WERenderer {
                            )
                            lock.lock()
                            attachmentsArray.append(newAttachment)
-                           attachmentsArray.sort { Int($0.identifier)! < Int($1.identifier)! }
+                           attachmentsArray.sort {(Int($0.identifier) ?? 0) < (Int($1.identifier) ?? 0)}
                            bestAttemptContent?.attachments = attachmentsArray
                            lock.unlock()
                            
@@ -126,7 +126,7 @@ struct WERenderer {
                 lock.lock()
                 if let attachment = attachment {
                     attachmentsArray.append(attachment)
-                    attachmentsArray.sort { Int($0.identifier)! < Int($1.identifier)! }
+                    attachmentsArray.sort {(Int($0.identifier) ?? 0) < (Int($1.identifier) ?? 0)}
                     bestAttemptContent?.attachments = attachmentsArray
                 } else {
                     hasFailure = true
