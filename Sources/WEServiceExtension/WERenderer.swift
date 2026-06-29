@@ -139,11 +139,24 @@ struct WERenderer {
     
     /// Marks the notification as fallback by adding is_fallback=true to customData in userInfo.
     private static func markAsFallback(bestAttemptContent: UNMutableNotificationContent?) {
+
         guard let bestAttemptContent = bestAttemptContent else { return }
+
+        // Early exit: only proceed if style == "TILES"
+        guard
+            let expandableDetails = bestAttemptContent.userInfo["expandableDetails"] as? [String: Any],
+            let style = expandableDetails["style"] as? String,
+            style.uppercased() == "TILES"
+        else {
+            return
+        }
+
         var userInfo = bestAttemptContent.userInfo
         var customData = userInfo["customData"] as? [[String: Any]] ?? []
+
         customData.append(["key": "is_fallback", "value": true])
         userInfo["customData"] = customData
+
         bestAttemptContent.userInfo = userInfo
         bestAttemptContent.attachments = []
     }
