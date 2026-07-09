@@ -73,7 +73,10 @@ open class WEXPushNotificationService: UNNotificationServiceExtension {
     private func registerCategoryAndExecute(completion: @escaping () -> Void) {
         customCategories = ["WEG_RICH_V1", "WEG_RICH_V2", "WEG_RICH_V3", "WEG_RICH_V4", "WEG_RICH_V5", "WEG_RICH_V6", "WEG_RICH_V7", "WEG_RICH_V8"]
         
-        guard let customCategory = WEHelper.getCategoryFor(categories: customCategories ?? [""], currentCategory: bestAttemptContent?.categoryIdentifier ?? "") else { return }
+        guard let customCategory = WEHelper.getCategoryFor(categories: customCategories ?? [""], currentCategory: bestAttemptContent?.categoryIdentifier ?? "") else {
+            completion()
+            return
+        }
         
         UNUserNotificationCenter.current().getNotificationCategories { existingCategories in
             var currentCategory: UNNotificationCategory?
@@ -112,7 +115,8 @@ open class WEXPushNotificationService: UNNotificationServiceExtension {
             UNUserNotificationCenter.current().setNotificationCategories(existingMutableCategories)
             self.bestAttemptContent?.categoryIdentifier = customCategory
             
-            // Delay to ensure category is registered with NotificationCenter
+            // Dispatching on Main thread after a 2-second delay to ensure our category is registered with NotificationCenter
+            // Registering will make sure contentHandler invokes ContentExtension with this custom category
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                 completion()
             }

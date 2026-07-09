@@ -66,7 +66,7 @@ struct WERenderer {
         
         guard !imageItems.isEmpty else { return }
         
-        let totalDownloads = imageItems.count + indexOffset
+        let totalDownloads = imageItems.count
         var attachmentsArray = [UNNotificationAttachment]()
         var downloadAttemptCounter = 0
         var hasFailure = false
@@ -91,49 +91,54 @@ struct WERenderer {
             }
         }
         
-        if let bgImage = backgroundImage, !bgImage.isEmpty {
-            let options: [AnyHashable: Any] = [UNNotificationAttachmentOptionsThumbnailHiddenKey: true]
-            
-            Network.fetchAttachment(for: bgImage, at: 0) { attachment, _ in
-                   if let attachment = attachment {
-                       do {
-                           let newAttachment = try UNNotificationAttachment(
-                               identifier: attachment.identifier,
-                               url: attachment.url,
-                               options: [
-                                   UNNotificationAttachmentOptionsThumbnailHiddenKey: true
-                               ]
-                           )
-                           lock.lock()
-                           attachmentsArray.append(newAttachment)
-                           attachmentsArray.sort {(Int($0.identifier) ?? 0) < (Int($1.identifier) ?? 0)}
-                           bestAttemptContent?.attachments = attachmentsArray
-                           lock.unlock()
-                           
-                       } catch {
-                           // fallback to original if needed
-                           lock.lock()
-                           attachmentsArray.append(attachment)
-                           lock.unlock()
-                       }
-                   }
-                   completionCheck()
-               }
+        let downloadTiles = {
+            for (index, imageURL) in imageItems {
+                Network.fetchAttachment(for: imageURL, at: index) { attachment, _ in
+                    lock.lock()
+                    if let attachment = attachment {
+                        attachmentsArray.append(attachment)
+                        attachmentsArray.sort {(Int($0.identifier) ?? 0) < (Int($1.identifier) ?? 0)}
+                        bestAttemptContent?.attachments = attachmentsArray
+                    } else {
+                        hasFailure = true
+                    }
+                    lock.unlock()
+                    completionCheck()
+                }
+            }
         }
         
-        for (index, imageURL) in imageItems {
-            Network.fetchAttachment(for: imageURL, at: index) { attachment, _ in
-                lock.lock()
+        if let bgImage = backgroundImage, !bgImage.isEmpty {
+            Network.fetchAttachment(for: bgImage, at: 0) { attachment, _ in
                 if let attachment = attachment {
-                    attachmentsArray.append(attachment)
+                    lock.lock()
+                    if let newAttachment = try? UNNotificationAttachment(
+                        identifier: attachment.identifier,
+                        url: attachment.url,
+                        options: [
+                            UNNotificationAttachmentOptionsThumbnailHiddenKey: true
+                        ]
+                    ) {
+                        attachmentsArray.append(newAttachment)
+                    } else {
+                        attachmentsArray.append(attachment)
+                    }
                     attachmentsArray.sort {(Int($0.identifier) ?? 0) < (Int($1.identifier) ?? 0)}
                     bestAttemptContent?.attachments = attachmentsArray
+                    lock.unlock()
+                    downloadTiles()
                 } else {
-                    hasFailure = true
+                    // Background image failed, skip tiles and go straight to fallback
+                    markAsFallback(bestAttemptContent: bestAttemptContent)
+                    Network.trackEvent(completion: {
+                        if let bestAttemptContent = bestAttemptContent {
+                            contentHandler?(bestAttemptContent)
+                        }
+                    }, bestAttemptContent: bestAttemptContent, contentHandler: contentHandler)
                 }
-                lock.unlock()
-                completionCheck()
             }
+        } else {
+            downloadTiles()
         }
     }
     
@@ -158,6 +163,10 @@ struct WERenderer {
         userInfo["customData"] = customData
 
         bestAttemptContent.userInfo = userInfo
+        // If any image fails to load, we fall back to the default layout. In the collapsed state, no image should be displayed, but since we don’t remove it from bestAttemptContent.attachments, it still appears in the collapsed view.
+        for attachment in bestAttemptContent.attachments {
+            try? FileManager.default.removeItem(at: attachment.url)
+        }
         bestAttemptContent.attachments = []
     }
 }
