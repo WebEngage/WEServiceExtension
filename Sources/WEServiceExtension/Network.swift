@@ -33,7 +33,7 @@ struct Network {
         var request = URLRequest(url: url)
         request.cachePolicy = .useProtocolCachePolicy
         request.timeoutInterval = 10.0
-        request.allHTTPHeaderFields = ["Accept": "image/webp"]
+        request.setValue("image/webp,image/gif", forHTTPHeaderField: "Accept")
         request.httpMethod = "GET"
         
         let session = URLSession.shared
@@ -42,6 +42,8 @@ struct Network {
             
             if let error = error {
                 print(error)
+            } else if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode < 200 || httpResponse.statusCode >= 300 {
+                print("Image download failed with status code: \(httpResponse.statusCode)")
             } else {
                 if let temporaryFileLocation = temporaryFileLocation {
                     let localURL = URL(fileURLWithPath: temporaryFileLocation.path + fileExt)
@@ -73,9 +75,13 @@ struct Network {
     static func trackEvent(completion: (() -> Void)?, bestAttemptContent: UNMutableNotificationContent?, contentHandler: ((UNNotificationContent) -> Void)?) {
     if Utils.isAppGroupConfigured(){
         let events = ["push_notification_received", "push_notification_view"]
+        // DispatchGroup ensures completion is called only once after all events finish,
+        // since calling contentHandler multiple times in a Service Extension is undefined behavior.
+        let group = DispatchGroup()
 
         for eventName in events {
             if var requestForEvent = getRequestForTracker(eventName: eventName, bestAttemptContent: bestAttemptContent) {
+                group.enter()
                 Utils.configureProxyURL(urlrequest: &requestForEvent)
                 Utils.trackIPLocation(request: &requestForEvent)
                 Utils.getInterceptedRequest(request: requestForEvent) { _modifiedRequest in
@@ -91,10 +97,14 @@ struct Network {
                                 print("Push Tracker URLResponse: \(networkResponse.response.debugDescription)")
                             }
                         }
-                        completion?()
+                        group.leave()
                     }.resume()
                 }
             }
+        }
+
+        group.notify(queue: .main) {
+            completion?()
         }
     } else {
             completion?()
@@ -110,7 +120,6 @@ struct Network {
     /// - Returns: A URLRequest for the event.
     static func getRequestForTracker(eventName: String, bestAttemptContent: UNMutableNotificationContent?) -> URLRequest? {
         if let url = URL(string: getBaseURL()) {
-            print("Base url: \(url)")
             //The below request is a var because in Swift using NSMutableURLRequest is not recommended
             //The best way to achieve the equivalent rest using var instead of let while creating a request.
             var request = URLRequest(url: url)
@@ -130,7 +139,7 @@ struct Network {
         var baseURL = "https://c.webengage.com/tracker"
         
         if let userDefaultsData = Utils.getDataFromSharedUserDefaults(),
-           let environment = userDefaultsData["environment"] as? String{
+           let environment = userDefaultsData[WEConstants.WEX_ENVIRONMENT] as? String{
 
             
             print("Setting Environment to: \(environment)")
