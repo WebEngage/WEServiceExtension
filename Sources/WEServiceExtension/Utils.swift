@@ -82,13 +82,11 @@ struct Utils {
         
         if sharedDefaults?.value(forKey: "WEG_ServiceToApp") == nil {
             sharedDefaults?.setValue("WEG", forKey: "WEG_ServiceToApp")
-            sharedDefaults?.synchronize()
         }
         
         // for SPM Code it will be saved under : WEServiceExtension_version
         // for WebEngageBannerPush it will be saved under : WEG_Service_Extension_Version
         sharedDefaults?.setValue(WEConstants.WEX_SERVICE_EXTENSION_VERSION, forKey: "WEServiceExtension_version")
-        sharedDefaults?.synchronize()
     }
     
     /// Modifies the given URLRequest to route through a proxy URL if applicable.
